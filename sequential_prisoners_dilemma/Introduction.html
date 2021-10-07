@@ -1,7 +1,125 @@
 {{ block title }}介绍{{ endblock }}
 {{ block content }}
 
-    {{ include Constants.instructions_template }}
+<style>
+p { 
+   text-indent: 30px;
+}
+</style>
+
+
+
+<div class="container">
+    <p>
+       A可以选择左或右，如下图所示。一旦知道A的决定，B就可以在左和右之间进行选择。
+       A和B的选择共同决定了每个人的收益。
+       如果双方都选择左，则各获得120元。
+       如果双方都选择右，则每人获得68元。
+       如果A选择右，B选择左则收益分别为140元和60元。
+       如果A选择左，B选择右，则收益分别为60元和140元。
+    </p>
+
+    
+</div> 
+
+
+
+<canvas id="myCanvas" width="320" height="450" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+
+<script>
+
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+
+ctx.beginPath();              
+ctx.strokeStyle="red";  // 绿色路径
+ctx.moveTo(160,50);
+ctx.lineTo(90,180);
+ctx.stroke();  // 进行绘制
+
+ctx.beginPath();              
+ctx.strokeStyle="red";  // 绿色路径
+ctx.moveTo(160,50);
+ctx.lineTo(230,180);
+ctx.stroke();  // 进行绘制
+
+ctx.beginPath();
+ctx.strokeStyle="blue";  // 紫色路径
+ctx.moveTo(90,180);
+ctx.lineTo(40,280);            
+ctx.stroke();  // 进行绘制
+
+ctx.beginPath();
+ctx.strokeStyle="blue";  // 紫色路径
+ctx.moveTo(90,180);
+ctx.lineTo(130,280);            
+ctx.stroke();  // 进行绘制
+
+ctx.beginPath();
+ctx.strokeStyle="blue";  // 紫色路径
+ctx.moveTo(230,180);
+ctx.lineTo(190,280);            
+ctx.stroke();  // 进行绘制
+
+ctx.beginPath();
+ctx.strokeStyle="blue";  // 紫色路径
+ctx.moveTo(230,180);
+ctx.lineTo(270,280);            
+ctx.stroke();  // 进行绘制
+
+
+
+
+
+// Create a red line in position 150
+ctx.font="15px Arial";   
+
+// Show the different textAlign values
+ctx.textAlign="center";      
+ctx.fillText("A",160,50);        
+ctx.textAlign="center";      
+ctx.fillText("B",160,180);                  
+ctx.textAlign="end";      
+ctx.fillText("左",120,120);
+ctx.textAlign="start";     
+ctx.fillText("右",200,120);
+
+ctx.textAlign="end";
+ctx.fillText("左",60,230);
+ctx.textAlign="start";      
+ctx.fillText("右",120,230);
+ctx.textAlign="end";
+ctx.fillText("左",200,230);
+ctx.textAlign="start";      
+ctx.fillText("右",260,230);
+
+
+ctx.textAlign="center";      
+ctx.fillText("A:120元",40,300);     
+ctx.textAlign="center";      
+ctx.fillText("B:120元",50,320);   
+
+ctx.textAlign="center";      
+ctx.fillText("A:60元",110,300);     
+ctx.textAlign="center";      
+ctx.fillText("B:140元",120,320); 
+
+ctx.textAlign="center";      
+ctx.fillText("A:140元",200,300);     
+ctx.textAlign="center";      
+ctx.fillText("B:60元",210,320); 
+
+ctx.textAlign="center";      
+ctx.fillText("A:68元",270,300);     
+ctx.textAlign="center";      
+ctx.fillText("B:68元",280,320); 
+</script>
+
+
+
 
     {{ next_button }}
 
