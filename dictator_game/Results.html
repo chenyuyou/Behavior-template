@@ -1,0 +1,15 @@
+{{ block title }}结果{{ endblock }}
+{{ block content }}
+    <p>
+
+        {{ if player.id_in_group == 1 }}
+            你决定为自己保留<strong>{{ group.kept120 }}</strong>。
+        {{ else }}
+            参与者1决定位自己保留 <strong>{{ group.kept120 }}</strong>，因此你获得
+            <strong>{{ offer }}</strong>.
+        {{ endif }}
+
+        {{ next_button }}
+    </p>
+    {{ include Constants.instructions_template }}
+{{ endblock }}

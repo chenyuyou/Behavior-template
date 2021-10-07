@@ -1,0 +1,35 @@
+{{ block title }}你的选择{{ endblock }}
+{{ block content }}
+
+    <div class="form-group required">
+        <table class="table table-bordered text-center" style="width: auto; margin: auto">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2">另一位参与者</th>
+            </tr>
+            <tr>
+                <th>合作</th>
+                <th>背叛</th>
+            </tr>
+            <tr>
+                <th rowspan="2"><span>你</span></th>
+                <td><button name="decision" value="Cooperate" class="btn btn-primary btn-large">我将合作</button></td>
+                <td>{{Constants.both_cooperate_payoff}}, {{Constants.both_cooperate_payoff}}</td>
+                <td>{{ Constants.betrayed_payoff }}, {{Constants.betray_payoff}}</td>
+            </tr>
+            <tr>
+                <td><button name="decision" value="Defect" class="btn btn-primary btn-large">我将背叛</button></td>
+                <td>{{Constants.betray_payoff}}, {{ Constants.betrayed_payoff }}</td>
+                <td>{{Constants.both_defect_payoff}}, {{Constants.both_defect_payoff}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <p>此处，你可以与另一位参与者聊天</p>
+
+    {{ chat }}
+
+
+    {{ include Constants.instructions_template }}
+
+{{ endblock }}

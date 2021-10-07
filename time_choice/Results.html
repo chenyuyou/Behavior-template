@@ -1,0 +1,21 @@
+{{ block title }}
+结果
+{{ endblock }}
+
+{{ block content }}
+
+<p>这是随机选择的被结算的一行。</p>
+
+{{ include Constants.table_template }}
+
+<p>
+    {{ if player.chose_lottery }}   
+    你选择了延迟获得{{player.payoff}}收益。
+    {{ else }}
+    你选择了立即获得{{player.payoff}}收益。
+    {{ endif }}
+</p>
+
+{{ endblock }}
+
+

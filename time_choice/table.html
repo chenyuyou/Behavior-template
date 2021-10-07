@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <tr>
+        <th></th>
+        <th>选择左或者右</th>
+        <th></th>
+    </tr>
+    {{ for t in trials }}
+    <tr>
+        <td>
+            立即获得{{ t.instant_payoff }}。
+        </td>
+        <td>
+            {{ if t.chose_lottery == None }}
+            <input type="radio" name="{{ t.id }}" value="0" required class="radio-choice">
+            <input type="radio" name="{{ t.id }}" value="1" required class="radio-choice">
+            {{ endif }}
+        </td>
+        <td>
+           延迟获得{{ t.delay_payoff}}。
+        </td>
+    </tr>
+    {{ endfor }}
+</table>

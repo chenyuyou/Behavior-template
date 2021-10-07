@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <tr>
+        <th></th>
+        <th>选择左或者右</th>
+        <th></th>
+    </tr>
+    {{ for t in trials }}
+    <tr>
+
+
+        <td>
+           以{{ t.probability1}}%的概率失去{{ t.lottery_high }}，以{{t.probability2}}%的概率失去{{ t.lottery_low }}。
+        </td>
+        <td>
+            {{ if t.chose_lottery == None }}
+            <input type="radio" name="{{ t.id }}" value="0" required class="radio-choice">
+            <input type="radio" name="{{ t.id }}" value="1" required class="radio-choice">
+            {{ endif }}
+        </td>
+        <td>
+            以100%的概率失去{{ t.sure_payoff }}。
+        </td>
+    </tr>
+    {{ endfor }}
+</table>

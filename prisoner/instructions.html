@@ -1,0 +1,43 @@
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+    <h3>
+        实验介绍
+    </h3>
+
+    <link rel="stylesheet" type="text/css"
+          href="{{ static 'global/matrix.css' }}"/>
+
+    <p>
+            在本研究中，你将与另一名参与者随机配对。
+            你们每个人同时私下选择是合作还是背叛。
+            你的收益将由以下你们的选择共同决定：
+    </p>
+    <p><i>在每个单元格中，左侧的金额是您的收益，右侧的金额是另一位参与者的收益。</i></p>
+
+    <table class='table table-bordered text-center'
+           style='width: auto; margin: auto'>
+        <tr>
+            <th colspan=2 rowspan=2></th>
+            <th colspan=2>另一位参与者</th>
+        </tr>
+        <tr>
+            <th>合作</th>
+            <th>背叛</th>
+        </tr>
+        <tr>
+            <th rowspan=2><span style="transform: rotate(-90deg);">你</span></th>
+            <th>合作</th>
+            <td>{{ Constants.both_cooperate_payoff }}, {{ Constants.both_cooperate_payoff }}</td>
+            <td>0, {{ Constants.betray_payoff }}</td>
+        </tr>
+        <tr>
+            <th>背叛</th>
+            <td>{{ Constants.betray_payoff }}, 0</td>
+            <td>{{ Constants.both_defect_payoff }}, {{ Constants.both_defect_payoff }}</td>
+        </tr>
+    </table>
+
+</div>
+</div>

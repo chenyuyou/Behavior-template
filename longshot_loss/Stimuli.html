@@ -1,0 +1,32 @@
+{{ block title }}
+{{ endblock }}
+{{ block content }}
+
+<p>
+    为以下每一行做出选择。
+    计算机将随机选择一行，您将根据您对该行的选择获得报酬。
+</p>
+
+{{ include Constants.table_template }}
+
+<input type="hidden" name="raw_responses" id="raw_responses">
+
+<button type="button" class="btn btn-primary" onclick="submitForm()">Next</button>
+
+<script>
+    function submitForm() {
+        let form = document.getElementById('form');
+        if (!form.reportValidity()) return;
+        let responses = {};
+        // could use serializeArray instead
+        for (let radio of document.getElementsByClassName('radio-choice')) {
+            if (radio.checked) {
+                responses[radio.name] = radio.value === '1';
+            }
+        }
+        document.getElementById('raw_responses').value = JSON.stringify(responses);
+        form.submit();
+    }
+</script>
+
+{{ endblock }}

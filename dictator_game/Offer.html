@@ -1,0 +1,38 @@
+{{ block title }}你的决定{{ endblock }}
+{{ block content }}
+    <p>
+        你是<b>参与者1</b>.
+        请决定如何分配{{ Constants.endowment160_1 }}，
+        决定为自己保留 {{ formfield "kept160_1"   }}, 决定为自己保留 {{ formfield "send160_1"   }} 。
+    </p>
+
+    <p>
+        你是<b>参与者1</b>.
+        请决定如何分配{{ Constants.endowment80 }}，
+        决定为自己保留 {{ formfield "kept80"   }}, 决定为自己保留 {{ formfield "send80"   }}。
+    </p>
+
+    <p>
+        你是<b>参与者1</b>.
+        请决定如何分配{{ Constants.endowment160_2 }}，
+        决定为自己保留 {{ formfield "kept160_2"   }}, 决定为自己保留 {{ formfield "send160_2"   }}。
+    </p>
+
+        <p>
+        你是<b>参与者1</b>.
+        请决定如何分配{{ Constants.endowment240 }}，
+        决定为自己保留 {{ formfield "kept240"   }}, 决定为自己保留 {{ formfield "send240"   }}。
+    </p>
+   
+        <p>
+        你是<b>参与者1</b>.
+        请决定如何分配{{ Constants.endowment120 }}，
+        决定为自己保留 {{ formfield "kept120"   }}, 决定为自己保留 {{ formfield "send120"   }}。
+    </p>
+   
+
+    {{ next_button }}
+
+    {{ include Constants.instructions_template }}
+
+{{ endblock }}
