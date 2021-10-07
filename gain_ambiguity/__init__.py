@@ -6,7 +6,7 @@ Choice list (Holt/Laury, risk preferences, price list, equivalence test, etc)
 
 
 class Constants(BaseConstants):
-    name_in_url = 'temporal_discounting'
+    name_in_url = 'gain_ambiguity'
     players_per_group = None
     num_rounds = 1
     table_template = __name__ + '/table.html'
@@ -46,10 +46,11 @@ class Player(BasePlayer):
 
 class Trial(ExtraModel):
     player = models.Link(Player)
-    tomorrow = models.CurrencyField()
-    day31= models.CurrencyField()
-    day351 = models.CurrencyField()
-    day381 = models.CurrencyField()
+    sure_payoff = models.CurrencyField()
+    lottery_high = models.CurrencyField()
+    lottery_low = models.CurrencyField()
+    probability1 = models.FloatField()
+    probability2 = models.FloatField()
     chose_lottery = models.BooleanField()
     randomly_chosen = models.BooleanField(initial=False)
 
@@ -57,6 +58,7 @@ class Trial(ExtraModel):
 # PAGES
 class Introduction(Page):
     pass
+
 
 
 class Stimuli(Page):

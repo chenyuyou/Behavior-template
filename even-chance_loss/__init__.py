@@ -6,7 +6,7 @@ Choice list (Holt/Laury, risk preferences, price list, equivalence test, etc)
 
 
 class Constants(BaseConstants):
-    name_in_url = 'risk_list'
+    name_in_url = 'even-chance_loss'
     players_per_group = None
     num_rounds = 1
     table_template = __name__ + '/table.html'
@@ -56,6 +56,10 @@ class Trial(ExtraModel):
 
 
 # PAGES
+class Introduction(Page):
+    pass
+
+
 class Stimuli(Page):
     form_model = 'player'
     form_fields = ['raw_responses']
@@ -97,4 +101,4 @@ class Results(Page):
         return dict(trials=trials)
 
 
-page_sequence = [Stimuli, Results]
+page_sequence = [Introduction, Stimuli, Results]
