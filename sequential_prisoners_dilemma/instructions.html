@@ -1,32 +1,93 @@
+<canvas id="myCanvas" width="320" height="450" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+
 <script>
+
 var c=document.getElementById("myCanvas");
 var ctx=c.getContext("2d");
 
-// 红色矩形
-ctx.beginPath();
-ctx.lineWidth="6";
-ctx.strokeStyle="red";
-ctx.rect(5,5,290,140);  
-ctx.stroke();
+ctx.beginPath();              
+ctx.strokeStyle="red";  // 绿色路径
+ctx.moveTo(160,50);
+ctx.lineTo(90,180);
+ctx.stroke();  // 进行绘制
 
-// 绿色矩形
-ctx.beginPath();
-ctx.lineWidth="4";
-ctx.strokeStyle="green";
-ctx.rect(30,30,50,50);
-ctx.stroke();
+ctx.beginPath();              
+ctx.strokeStyle="red";  // 绿色路径
+ctx.moveTo(160,50);
+ctx.lineTo(230,180);
+ctx.stroke();  // 进行绘制
 
-// 蓝色矩形
 ctx.beginPath();
-ctx.lineWidth="10";
-ctx.strokeStyle="blue";
-ctx.rect(50,50,150,80);
-ctx.stroke();
+ctx.strokeStyle="blue";  // 紫色路径
+ctx.moveTo(90,180);
+ctx.lineTo(40,280);            
+ctx.stroke();  // 进行绘制
+
+ctx.beginPath();
+ctx.strokeStyle="blue";  // 紫色路径
+ctx.moveTo(90,180);
+ctx.lineTo(130,280);            
+ctx.stroke();  // 进行绘制
+
+ctx.beginPath();
+ctx.strokeStyle="blue";  // 紫色路径
+ctx.moveTo(230,180);
+ctx.lineTo(190,280);            
+ctx.stroke();  // 进行绘制
+
+ctx.beginPath();
+ctx.strokeStyle="blue";  // 紫色路径
+ctx.moveTo(230,180);
+ctx.lineTo(270,280);            
+ctx.stroke();  // 进行绘制
+
+
+
+
+
+// Create a red line in position 150
+ctx.font="15px Arial";   
+
+// Show the different textAlign values
+ctx.textAlign="center";      
+ctx.fillText("A",160,50);        
+ctx.textAlign="center";      
+ctx.fillText("B",160,180);                  
+ctx.textAlign="end";      
+ctx.fillText("左",120,120);
+ctx.textAlign="start";     
+ctx.fillText("右",200,120);
+
+ctx.textAlign="end";
+ctx.fillText("左",60,230);
+ctx.textAlign="start";      
+ctx.fillText("右",120,230);
+ctx.textAlign="end";
+ctx.fillText("左",200,230);
+ctx.textAlign="start";      
+ctx.fillText("右",260,230);
+
+
+ctx.textAlign="center";      
+ctx.fillText("A:120元",40,300);     
+ctx.textAlign="center";      
+ctx.fillText("B:120元",50,320);   
+
+ctx.textAlign="center";      
+ctx.fillText("A:60元",110,300);     
+ctx.textAlign="center";      
+ctx.fillText("B:140元",120,320); 
+
+ctx.textAlign="center";      
+ctx.fillText("A:140元",200,300);     
+ctx.textAlign="center";      
+ctx.fillText("B:60元",210,320); 
+
+ctx.textAlign="center";      
+ctx.fillText("A:68元",270,300);     
+ctx.textAlign="center";      
+ctx.fillText("B:68元",280,320); 
 </script>
-
-
-   
-<canvas id="myCanvas" width="320" height="240">
-    <p>卧槽你的浏览器竟然不支持 canvas！</p>
-</canvas>
-

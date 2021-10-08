@@ -2,12 +2,9 @@
 {{ block content }}
 
     <p>
-        {{ if same_choice }}
-            你们都选择了{{ my_decision }}。
-        {{ else }}
-            你选择了{{ my_decision }}， 另一位参与者选择了{{ opponent_decision }}。
-        {{ endif }}
+        如果你是A，你选择了{{ my_decisionA }}，B选择了{{ opponent_decisionA}}。
     </p>
+
 
     <p>
         因此, 你得到{{ player.payoff }}。

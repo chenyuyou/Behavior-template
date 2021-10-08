@@ -2,7 +2,6 @@ from otree.api import *
 
 
 
-
 doc = """
 This is a one-shot "Prisoner's Dilemma". Two players are asked separately
 whether they want to cooperate or defect. Their choices directly determine the
@@ -16,11 +15,11 @@ class Constants(BaseConstants):
     num_rounds = 1
     instructions_template = 'sequential_prisoners_dilemma/instructions.html'
     # payoff if 1 player defects and the other cooperates""",
-    betray_payoff = cu(300)
-    betrayed_payoff = cu(0)
+    betray_payoff = cu(140)
+    betrayed_payoff = cu(60)
     # payoff if both players cooperate or both defect
-    both_cooperate_payoff = cu(200)
-    both_defect_payoff = cu(100)
+    both_cooperate_payoff = cu(120)
+    both_defect_payoff = cu(68)
 
 
 class Subsession(BaseSubsession):
@@ -32,10 +31,24 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    decision = models.StringField(
-        choices=[['Cooperate', 'Cooperate'], ['Defect', 'Defect']],
+    decisionA = models.StringField(
+    #    choices=[['Cooperate', '左'], ['Defect', '右']],
+        choices=[['左', '左'], ['右', '右']],
         doc="""This player's decision""",
-        widget=widgets.RadioSelect,
+        widget=widgets.RadioSelectHorizontal, label="如果我是A，我选择："
+    )
+
+    decisionB1 = models.StringField(
+    #    choices=[['Cooperate', '左'], ['Defect', '右']],
+        choices=[['左', '左'], ['右', '右']],
+        doc="""This player's decision""",
+        widget=widgets.RadioSelectHorizontal, label="如果我是B，且A选择了左，那我选择："
+    )
+    decisionB2 = models.StringField(
+    #    choices=[['Cooperate', '左'], ['Defect', '右']],
+        choices=[['左', '左'], ['右', '右']],
+        doc="""This player's decision""", 
+        widget=widgets.RadioSelectHorizontal, label="如果我是B，且A选择了右，那我选择："
     )
 
 
@@ -51,14 +64,16 @@ def other_player(player: Player):
 
 def set_payoff(player: Player):
     payoff_matrix = dict(
-        Cooperate=dict(
-            Cooperate=Constants.both_cooperate_payoff, Defect=Constants.betrayed_payoff
+        左=dict(
+#            Cooperate=Constants.both_cooperate_payoff, Defect=Constants.betrayed_payoff
+            左=Constants.both_cooperate_payoff, 右=Constants.betrayed_payoff
         ),
-        Defect=dict(
-            Cooperate=Constants.betray_payoff, Defect=Constants.both_defect_payoff
+        右=dict(
+#            Cooperate=Constants.betray_payoff, Defect=Constants.both_defect_payoff
+            左=Constants.betray_payoff, 右=Constants.both_defect_payoff
         ),
     )
-    player.payoff = payoff_matrix[player.decision][other_player(player).decision]
+    player.payoff = payoff_matrix[player.decisionA][other_player(player).decisionA]
 
 
 # PAGES
@@ -68,7 +83,7 @@ class Introduction(Page):
 
 class Decision(Page):
     form_model = 'player'
-    form_fields = ['decision']
+    form_fields = ['decisionA', 'decisionB1', 'decisionB2']
 
 
 class ResultsWaitPage(WaitPage):
@@ -81,9 +96,8 @@ class Results(Page):
         me = player
         opponent = other_player(me)
         return dict(
-            my_decision=me.decision,
-            opponent_decision=opponent.decision,
-            same_choice=me.decision == opponent.decision,
+            my_decisionA=me.decisionA,         
+            opponent_decisionA=opponent.decisionA
         )
 
 
