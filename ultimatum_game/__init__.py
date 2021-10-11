@@ -25,13 +25,19 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
-    kept = models.CurrencyField(
+    offer = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
         min=0,
         max=Constants.endowment,
         label="我打算给参与者B",
     )
 
+    accept = models.CurrencyField(
+        doc="""Amount dictator decided to keep for himself""",
+        min=0,
+        max=Constants.endowment,
+        label="最少我能接受多少？",
+    )
 
 class Player(BasePlayer):
     pass
@@ -41,8 +47,12 @@ class Player(BasePlayer):
 def set_payoffs(group: Group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
-    p1.payoff = group.kept
-    p2.payoff = Constants.endowment - group.kept
+    if group.accept <= group.offer:
+        p1.payoff = Constants.endowment - group.offer
+        p2.payoff = group.offer
+    else:
+        p1.payoff = 0
+        p2.payoff = 0
 
 
 # PAGES
@@ -52,11 +62,19 @@ class Introduction(Page):
 
 class Offer(Page):
     form_model = 'group'
-    form_fields = ['kept']
+    form_fields = ['offer']
 
     @staticmethod
     def is_displayed(player: Player):
         return player.id_in_group == 1
+
+class Accept(Page):
+    form_model = 'group'
+    form_fields = ['accept']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.id_in_group == 2
 
 
 class ResultsWaitPage(WaitPage):
@@ -68,7 +86,7 @@ class Results(Page):
     def vars_for_template(player: Player):
         group = player.group
 
-        return dict(offer=Constants.endowment - group.kept)
+        
 
 
-page_sequence = [Introduction, Offer, ResultsWaitPage, Results]
+page_sequence = [Introduction, Offer, Accept, ResultsWaitPage, Results]

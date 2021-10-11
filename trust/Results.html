@@ -1,0 +1,35 @@
+{{ block title }}结果{{ endblock }}
+{{ block content }}
+
+    {{ if player.id_in_group == 1 }}
+        <p>
+            你选择给B发送{{ group.sent_amount }}。
+            B返还给你{{ group.sent_back_amount }}。
+        </p>
+        <p>
+            你最初拥有{{ Constants.endowment }}，
+            选择发送出{{ group.sent_amount }}，
+            收到{{ group.sent_back_amount }}
+            因此你现在拥有：
+            {{ Constants.endowment }}-{{ group.sent_amount }}+{{ group.sent_back_amount }}=<b>{{ player.payoff }}</b>
+        </p>
+    {{ else }}
+        <p>
+            A发送给你{{ group.sent_amount }}。
+            经过翻倍，因此你收到{{ tripled_amount }}。
+            你选择发送还{{ group.sent_back_amount }}。
+        </p>
+        <p>
+            你收到{{ tripled_amount }}，
+            你选择返还{{ group.sent_back_amount }}
+            因此你现在拥有：
+            ({{ tripled_amount }})-({{ group.sent_back_amount }})=<b>{{ player.payoff }}</b>
+        </p>
+        。
+    {{ endif }}
+
+    <p>{{ next_button }}</p>
+
+    {{ include Constants.instructions_template }}
+
+{{ endblock }}

@@ -83,7 +83,7 @@ class Stimuli(Page):
         trial.randomly_chosen = True
         player.chose_lottery = trial.chose_lottery
         if player.chose_lottery:
-            player.won_lottery = trial.probability1 > random.random()
+            player.won_lottery = trial.probability1 > random.randrange(100)
             if player.won_lottery:
                 payoff = trial.lottery_high
             else:

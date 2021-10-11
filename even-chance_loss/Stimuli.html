@@ -1,6 +1,25 @@
 {{ block title }}
 {{ endblock }}
 {{ block content }}
+<style>
+p { 
+   text-indent: 30px;
+}
+</style>
+
+<div class="container">
+    <p>
+       从一副牌（包括10张黑色牌和10张红色牌）中随机抽取的一张牌（可能是红色或黑色），请您猜测牌的颜色。 
+    </p>
+
+    <p>
+        选择左边表示：你先猜牌的颜色是黑色还是红色，然后从20张牌中抽一张牌。如果您猜对了，您将失去0元，否则，您将失去60元。即50%的机会失去60元，50%的机会失去0元。
+    </p>
+    <p>
+        选择右侧表示: 您确定失去所描述的金额。
+    </p>
+</div> 
+
 
 <p>
     为以下每一行做出选择。
@@ -21,7 +40,7 @@
         // could use serializeArray instead
         for (let radio of document.getElementsByClassName('radio-choice')) {
             if (radio.checked) {
-                responses[radio.name] = radio.value === '1';
+                responses[radio.name] = radio.value === '0';
             }
         }
         document.getElementById('raw_responses').value = JSON.stringify(responses);

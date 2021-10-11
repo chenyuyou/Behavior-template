@@ -10,10 +10,10 @@
 
 <p>
     {{ if player.chose_lottery }}
-    你选择了{{ if player.won_lottery }}概率获得{{ else }}失去{{ endif }}收益，
+    你选择了概率失去收益，
     {{ else }}
-    你选择了确定的回报，{{ endif }}
-    因此你的收益为 {{ player.payoff }}。
+    你选择了确定的损失，{{ endif }}
+    因此你的收益为{{ player.payoff }}。
 </p>
 
 {{ endblock }}

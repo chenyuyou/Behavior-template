@@ -4,12 +4,12 @@ doc = """
 Choice list (Holt/Laury, risk preferences, price list, equivalence test, etc)
 """
 
-
 class Constants(BaseConstants):
     name_in_url = 'temporal_discounting'
     players_per_group = None
     num_rounds = 1
     table_template = __name__ + '/table.html'
+   
 
 
 def read_csv():
@@ -32,7 +32,7 @@ def creating_session(subsession: Subsession):
         stimuli = read_csv()
         for stim in stimuli:
             Trial.create(player=p, **stim)
-
+            
 
 class Group(BaseGroup):
     pass
@@ -41,7 +41,6 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     raw_responses = models.LongStringField()
     chose_lottery = models.BooleanField()
-    won_lottery = models.BooleanField()
 
 
 class Trial(ExtraModel):
@@ -52,7 +51,6 @@ class Trial(ExtraModel):
     day381 = models.CurrencyField()
     chose_lottery = models.BooleanField()
     randomly_chosen = models.BooleanField(initial=False)
-
 
 # PAGES
 class Introduction(Page):
@@ -65,15 +63,16 @@ class Stimuli(Page):
 
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(trials=Trial.filter(player=player))
+        trials=Trial.filter(player=player)
+        half=trials[10].id
+        return dict(trials=trials,half=half)
+#        return dict(trials=Trial.filter(player=player))
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         import json
         import random
-
         trials = Trial.filter(player=player)
-
         # you could adjust this code to handle timeout_happened.
         responses = json.loads(player.raw_responses)
         for trial in trials:
@@ -83,21 +82,19 @@ class Stimuli(Page):
         trial.randomly_chosen = True
         player.chose_lottery = trial.chose_lottery
         if player.chose_lottery:
-            player.won_lottery = trial.probability1 > random.random()
-            if player.won_lottery:
-                payoff = trial.lottery_high
-            else:
-                payoff = trial.lottery_low
+            payoff = trial.tomorrow
         else:
-            payoff = trial.sure_payoff
+            payoff = trial.day31
         player.payoff = payoff
+
 
 
 class Results(Page):
     @staticmethod
     def vars_for_template(player: Player):
         trials = Trial.filter(player=player, randomly_chosen=True)
-        return dict(trials=trials)
+        half = trials[0].id
+        return dict(trials=trials,half=half)
 
 
 page_sequence = [Introduction, Stimuli, Results]

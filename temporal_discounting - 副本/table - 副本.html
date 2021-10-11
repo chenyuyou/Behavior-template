@@ -7,7 +7,7 @@
     {{ for t in trials }}
     <tr>
 
-    {{ if t.id >= half }}  
+
         <td>
            明天获得{{t.tomorrow}}。
         </td>
@@ -20,9 +20,22 @@
         <td>
             31天后获得{{ t.day31 }}。
         </td>
-    {{ else }}
+    </tr>
+    {{ endfor }}
+</table>
+
+<table class="table table-striped">
+    <tr>
+        <th></th>
+        <th>选择左或者右</th>
+        <th></th>
+    </tr>
+    {{ for t in trials }}
+    <tr>
+
+
         <td>
-           351天后获得{{t.day351}}。
+           351天后获得{{t.tomorrow}}。
         </td>
         <td>
             {{ if t.chose_lottery == None }}
@@ -31,10 +44,8 @@
             {{ endif }}
         </td>
         <td>
-            381天后获得{{ t.day381 }}。
-        </td>    
-    {{ endif }}
+            381天后获得{{ t.day31 }}。
+        </td>
     </tr>
     {{ endfor }}
 </table>
-

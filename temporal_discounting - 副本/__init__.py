@@ -1,16 +1,15 @@
-from random import randrange
 from otree.api import *
 
 doc = """
 Choice list (Holt/Laury, risk preferences, price list, equivalence test, etc)
 """
 
-
 class Constants(BaseConstants):
-    name_in_url = 'loss_ambiguity'
+    name_in_url = 'temporal_discounting'
     players_per_group = None
     num_rounds = 1
-    table_template = __name__ + '/table.html'
+    table_template1 = __name__ + '/table1.html'
+    table_template2 = __name__ + '/table2.html'
 
 
 def read_csv():
@@ -33,7 +32,7 @@ def creating_session(subsession: Subsession):
         stimuli = read_csv()
         for stim in stimuli:
             Trial.create(player=p, **stim)
-
+            
 
 class Group(BaseGroup):
     pass
@@ -42,27 +41,24 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     raw_responses = models.LongStringField()
     chose_lottery = models.BooleanField()
-    won_lottery = models.BooleanField()
 
 
 class Trial(ExtraModel):
     player = models.Link(Player)
-    sure_payoff = models.CurrencyField()
-    lottery_high = models.CurrencyField()
-    lottery_low = models.CurrencyField()
-    probability1 = models.FloatField()
-    probability2 = models.FloatField()
-    chose_lottery = models.BooleanField()
+    tomorrow = models.CurrencyField()
+    day31= models.CurrencyField()
+    day351 = models.CurrencyField()
+    day381 = models.CurrencyField()
+    chose_lottery1 = models.BooleanField()
+    chose_lottery2 = models.BooleanField()
     randomly_chosen = models.BooleanField(initial=False)
-
 
 # PAGES
 class Introduction(Page):
     pass
 
 
-
-class Stimuli(Page):
+class Stimuli1(Page):
     form_model = 'player'
     form_fields = ['raw_responses']
 
@@ -74,9 +70,7 @@ class Stimuli(Page):
     def before_next_page(player: Player, timeout_happened):
         import json
         import random
-
         trials = Trial.filter(player=player)
-
         # you could adjust this code to handle timeout_happened.
         responses = json.loads(player.raw_responses)
         for trial in trials:
@@ -86,15 +80,37 @@ class Stimuli(Page):
         trial.randomly_chosen = True
         player.chose_lottery = trial.chose_lottery
         if player.chose_lottery:
-            player.won_lottery = random.randrange(20) > random.randrange(20)
-            if player.won_lottery:
-                payoff = -trial.lottery_high
-            else:
-                payoff = -trial.lottery_low
+            payoff = trial.tomorrow
         else:
-            payoff = -trial.sure_payoff
+            payoff = trial.day31
         player.payoff = payoff
 
+class Stimuli2(Page):
+    form_model = 'player'
+    form_fields = ['raw_responses']
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(trials=Trial.filter(player=player))
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        import json
+        import random
+        trials = Trial.filter(player=player)
+        # you could adjust this code to handle timeout_happened.
+        responses = json.loads(player.raw_responses)
+        for trial in trials:
+            trial.chose_lottery = responses[str(trial.id)]
+
+        trial = random.choice(trials)
+        trial.randomly_chosen = True
+        player.chose_lottery = trial.chose_lottery
+        if player.chose_lottery:
+            payoff = trial.day351
+        else:
+            payoff = trial.day381
+        player.payoff = payoff
 
 class Results(Page):
     @staticmethod
@@ -103,4 +119,4 @@ class Results(Page):
         return dict(trials=trials)
 
 
-page_sequence = [Introduction, Stimuli, Results]
+page_sequence = [Introduction, Stimuli1, Stimuli2, Results]

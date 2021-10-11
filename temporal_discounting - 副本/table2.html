@@ -9,17 +9,18 @@
 
 
         <td>
-           押注抽到的牌的颜色。
+           351天后获得{{t.tomorrow}}。
         </td>
         <td>
-            {{ if t.chose_lottery == None }}
+            {{ if t.chose_lottery2 == None }}
             <input type="radio" name="{{ t.id }}" value="0" required class="radio-choice">
             <input type="radio" name="{{ t.id }}" value="1" required class="radio-choice">
             {{ endif }}
         </td>
         <td>
-            以100%的概率获得{{ t.sure_payoff }}。
+            381天后获得{{ t.day31 }}。
         </td>
     </tr>
     {{ endfor }}
 </table>
+

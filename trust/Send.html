@@ -1,0 +1,15 @@
+{{ block title }}你的选择{{ endblock }}
+{{ block content }}
+
+    <p>
+    你是参与者A。 现在你拥有{{Constants.endowment}}。你愿意给B发送多少钱？
+    </p>
+
+    {{ formfields }}
+    <p>
+    {{ next_button }}
+    </p>
+
+    {{ include Constants.instructions_template }}
+
+{{ endblock }}

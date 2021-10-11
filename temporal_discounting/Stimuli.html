@@ -11,7 +11,7 @@
 
 <input type="hidden" name="raw_responses" id="raw_responses">
 
-<button type="button" class="btn btn-primary" onclick="submitForm()">Next</button>
+<button type="button" class="btn btn-primary" onclick="submitForm()">下一页</button>
 
 <script>
     function submitForm() {
@@ -21,9 +21,11 @@
         // could use serializeArray instead
         for (let radio of document.getElementsByClassName('radio-choice')) {
             if (radio.checked) {
-                responses[radio.name] = radio.value === '1';
+                responses[radio.name] = radio.value === '0';
             }
         }
+
+
         document.getElementById('raw_responses').value = JSON.stringify(responses);
         form.submit();
     }

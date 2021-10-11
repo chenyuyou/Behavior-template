@@ -2,39 +2,16 @@
 {{ endblock }}
 {{ block content }}
 
-<style>
-p { 
-   text-indent: 30px;
-}
-</style>
-
-
-
-<div class="container">
-    <p>
-       从一副牌（包括99张黑色牌和1张红色牌）中随机抽取的一张牌（可能是红色或黑色），请您猜测牌的颜色。 
-    </p>
-
-    <p>
-        选择左边表示：你如果抽中了红色的牌，那么您将获得240元，否则，您将一无所获。即1%的机会获得800元，99%的机会获得0元。
-    </p>
-    <p>
-        选择右侧表示: 您确定能获得所描述的金额。
-    </p>
-</div> 
-
-
-
 <p>
     为以下每一行做出选择。
     计算机将随机选择一行，您将根据您对该行的选择获得报酬。
 </p>
 
-{{ include Constants.table_template }}
+{{ include Constants.table_template2 }}
 
 <input type="hidden" name="raw_responses" id="raw_responses">
 
-<button type="button" class="btn btn-primary" onclick="submitForm()">Next</button>
+<button type="button" class="btn btn-primary" onclick="submitForm()">下一页</button>
 
 <script>
     function submitForm() {
@@ -47,6 +24,8 @@ p {
                 responses[radio.name] = radio.value === '0';
             }
         }
+
+
         document.getElementById('raw_responses').value = JSON.stringify(responses);
         form.submit();
     }

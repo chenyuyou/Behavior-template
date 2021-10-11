@@ -1,0 +1,14 @@
+{{ block title }}Your Choice{{ endblock }}
+{{ block content }}
+    <p>
+        你是参与者B。
+        A发送给你{{ group.sent_amount }}，你收到{{ tripled_amount }}。
+        现在你拥有{{ tripled_amount }}。
+        你将会发送给A多少？
+    </p>
+
+    {{ formfields }}
+    <p>{{ next_button }}</p>
+    {{ include Constants.instructions_template }}
+
+{{ endblock }}

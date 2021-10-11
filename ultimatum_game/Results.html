@@ -3,10 +3,10 @@
     <p>
 
         {{ if player.id_in_group == 1 }}
-            You decided to keep <strong>{{ group.kept }}</strong> for yourself.
+            你决定给B<strong>{{ group.offer }}</strong>，B最低要求<strong>{{ group.accept}}</strong>，所以你最终得到<strong>{{ player.payoff}}</strong>。
         {{ else }}
-            Participant 1 decided to keep <strong>{{ group.kept }}</strong>, so
-            you got <strong>{{ offer }}</strong>.
+            A决定给你<strong>{{ group.offer }}</strong>, 你最低要求<strong>{{ group.accept}}</strong>，所以你最终得到<strong>{{ player.payoff}}</strong>。
+
         {{ endif }}
 
         {{ next_button }}

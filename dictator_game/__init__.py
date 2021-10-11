@@ -29,11 +29,14 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
+    pass
+
+class Player(BasePlayer):
     kept160_1 = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
         min=0,
         max=Constants.endowment160_1,
-        label="我保留",
+        label="",
     )
     kept80 = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
@@ -64,7 +67,7 @@ class Group(BaseGroup):
         doc="""Amount dictator decided to keep for himself""",
         min=0,
         max=Constants.endowment160_1,
-        label="我给出",
+        label="",
     )
     send80 = models.CurrencyField(
         doc="""Amount dictator decided to keep for himself""",
@@ -91,16 +94,13 @@ class Group(BaseGroup):
         label="我给出",
     )
 
-class Player(BasePlayer):
-    pass
-
 
 # FUNCTIONS
 def set_payoffs(group: Group):
     p1 = group.get_player_by_id(1)
     p2 = group.get_player_by_id(2)
-    p1.payoff = choice([group.kept160_1, group.kept80, group.kept160_2, group.kept240, group.kept120])
-    p2.payoff = choice([Constants.endowment160_1 - group.kept160_1, Constants.endowment80 - group.kept80, Constants.endowment160_2 - group.kept160_2, Constants.endowment240 - group.kept240, Constants.endowment120 - group.kept120])
+    p1.payoff = choice([Constants.endowment160_1 - p1.kept160_1, Constants.endowment80 - p1.kept80, Constants.endowment160_2 - p1.kept160_2, Constants.endowment240 - p1.kept240, Constants.endowment120 - p1.kept120])
+    p2.payoff = choice([Constants.endowment160_1 - p2.kept160_1, Constants.endowment80 - p2.kept80, Constants.endowment160_2 - p2.kept160_2, Constants.endowment240 - p2.kept240, Constants.endowment120 - p2.kept120])
 
 
 # PAGES
@@ -109,13 +109,11 @@ class Introduction(Page):
 
 
 class Offer(Page):
-    form_model = 'group'
+    form_model = 'player'
     form_fields = ['kept160_1', 'kept80', 'kept160_2', 'kept240', 'kept120', 'send160_1', 'send80', 'send160_2', 'send240', 'send120',]
 
 
-    @staticmethod
-    def is_displayed(player: Player):
-        return player.id_in_group == 1
+
 
 
 class ResultsWaitPage(WaitPage):
@@ -125,9 +123,9 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     @staticmethod
     def vars_for_template(player: Player):
-        group = player.group
+        
 
-        return dict(offer=Constants.endowment80 - group.kept80)
+        return dict(offer= player.kept80)
 
 
 page_sequence = [Introduction, Offer, ResultsWaitPage, Results]

@@ -1,37 +1,130 @@
 {{ block title }}你的决定{{ endblock }}
 {{ block content }}
-    <p>
-        你是<b>参与者1</b>.
-        请决定如何分配{{ Constants.endowment160_1 }}，
-        决定为自己保留 {{ formfield "kept160_1"   }}, 决定为自己保留 {{ formfield "send160_1"   }} 。
-    </p>
+
+<style>
+p { 
+   text-indent: 30px;
+}
+</style>
+
+<script>
+
+	// 获取输入框内容
+    window.onload = function() {
+	    var kept160_1 = document.getElementById("kept160_1");
+	    var kept80 = document.getElementById("kept80");
+	    var kept160_2 = document.getElementById("kept160_2");
+	    var kept240 = document.getElementById("kept240");
+	    var kept120 = document.getElementById("kept120");
+
+	    var send160_1 = document.getElementById("send160_1");
+	    var send80 = document.getElementById("send80");
+	    var send160_2 = document.getElementById("send160_2");
+	    var send240 = document.getElementById("send240");
+	    var send120 = document.getElementById("send120");
+      	// 获取提交按钮
+	    var btn_submit = document.getElementById("btn_submit");
+        function check() {
+
+            var kept160_1_value = kept160_1.value;
+            var kept80_vale = kept80.value;
+            var kept160_2_value = kept160_2.value;
+            var kept240_value = kept240.value;
+            var kept120_value = kept120.value;
+            
+            var send160_1_value = send160_1.value;
+            var send80_vale = send80.value;
+            var send160_2_value = send160_2.value;
+            var send240_value = send240.value;
+            var send120_value = send120.value;
+        // 必填项验证
+            if (""==kept160_1_value || null==kept160_1_value) {
+		        alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (kept80_value=="" || kept80_value==null) {
+		        alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (kept160_2_value=="" || kept160_2_value==null) {
+		        alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (kept240_value =="" || kept240_value==null) {
+        		alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (kept120_value =="" || kept120_value ==null) {
+        		alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (""==send160_1_value) {
+		        alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (send80_value=="") {
+		        alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (send160_2_value=="") {
+		        alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (send240_value =="") {
+        		alert("该输入项不能为空");
+ 	        return false;
+            }
+
+            if (send120_value =="") {
+        		alert("该输入项不能为空");
+ 	        return false;
+            }
+        // 错误信息清空
+            msg.innerHTML = "";
+            return true;
+
+        };
+        btn_submit.onclick = check;
+
+    }
+</script>
+
+
+
 
     <p>
-        你是<b>参与者1</b>.
-        请决定如何分配{{ Constants.endowment80 }}，
-        决定为自己保留 {{ formfield "kept80"   }}, 决定为自己保留 {{ formfield "send80"   }}。
+        为以下每一个决策做出选择。
+        计算机将随机选择一行，您将根据您对该行的选择获得报酬。
     </p>
-
-    <p>
-        你是<b>参与者1</b>.
-        请决定如何分配{{ Constants.endowment160_2 }}，
-        决定为自己保留 {{ formfield "kept160_2"   }}, 决定为自己保留 {{ formfield "send160_2"   }}。
-    </p>
-
-        <p>
-        你是<b>参与者1</b>.
-        请决定如何分配{{ Constants.endowment240 }}，
-        决定为自己保留 {{ formfield "kept240"   }}, 决定为自己保留 {{ formfield "send240"   }}。
-    </p>
-   
-        <p>
-        你是<b>参与者1</b>.
-        请决定如何分配{{ Constants.endowment120 }}，
-        决定为自己保留 {{ formfield "kept120"   }}, 决定为自己保留 {{ formfield "send120"   }}。
-    </p>
-   
-
-    {{ next_button }}
+        
+    <form  name="offer"  onsubmit="return validateForm()" method="post">
+    <ol>
+    <li>    你是<b>参与者A</b>。现在你拥有{{ Constants.endowment160_1 }}，
+        你决定为自己留下<input type="text" name="kept160_1" value="" id="kept160_1"><span id="msg"></span>, 决定给B<input type="text" name="send160_1" value="" id="send160_1"><span id="msg"></span>x2。
+    </li>
+    <li>   你是<b>参与者A</b>。现在你拥有{{ Constants.endowment80 }}，
+        你决定为自己留下<input type="text" name="kept80" value="" id="kept80"><span id="msg"></span>, 决定给B<input type="text" name="send80" value="" id="send80"><span id="msg"></span>x3。
+    </li> 
+    <li>   你是<b>参与者A</b>。现在你拥有{{ Constants.endowment160_2 }}，
+        你决定为自己留下<input type="text" name="kept160_2" value="" id="kept160_2"><span id="msg"></span>, 决定给B<input type="text" name="send160_2" value="" id="send160_2"><span id="msg"></span>x1/2。
+    </li> 
+    <li>   你是<b>参与者A</b>。现在你拥有{{ Constants.endowment240 }}，
+        你决定为自己留下<input type="text" name="kept240" value="" id="kept240"><span id="msg"></span>, 决定给B<input type="text" name="send240" value="" id="send240"><span id="msg"></span>x1/3。
+    </li> 
+    <li>   你是<b>参与者A</b>。现在你拥有{{ Constants.endowment120 }}，
+        你决定为自己留下<input type="text" name="kept120" value="" id="kept120"><span id="msg"></span>, 决定给B<input type="text" name="send120" value="" id="send120"><span id="msg"></span>x1。
+    </li> 
+    </ol>
+    <input type="submit" class="btn btn-primary" value="下一页" id="btn_submit">
+    </form>
 
     {{ include Constants.instructions_template }}
 
