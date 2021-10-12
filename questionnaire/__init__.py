@@ -53,16 +53,20 @@ class Player(BasePlayer):
     xueshenghui = models.StringField(label="26、您是校（院）学生会成员么？",choices=["是","否"])
     ziranzaihai = models.StringField(label="27、您家乡面临的自然死亡风险是什么？",choices=["地震","水灾","台风","雪灾"])
     taifengpinlv = models.StringField(label="28、您上大学前经历的台风多么？",choices=["没有","一年一次","一年两次","一年三次","一年四次及以上"])
+    xinqing = models.StringField(label="29、您今天的心情怎么样？",choices=["非常开心","开心","不好不坏","不开心","非常不开心"])
+    yumen = models.StringField(label="30、过去一周，你感到沮丧、郁闷，做什么事情都不能振奋的频率？",choices=["几乎每天","有四五天","两三天","有一天","从来没有过"])
+    jinzhang = models.StringField(label="31、过去一周，你感到精神紧张的频率？",choices=["几乎每天","有四五天","两三天","有一天","从来没有过"])
+    zuolibuan = models.StringField(label="32、过去一周，你感到坐卧不安、难以保持平静的频率？",choices=["几乎每天","有四五天","两三天","有一天","从来没有过"])
+    meixiwang = models.StringField(label="33、过去一周，你感到未来没有希望的频率？",choices=["几乎每天","有四五天","两三天","有一天","从来没有过"])
+    kunnan = models.StringField(label="34、过去一周，你做任何事情感到困难的频率？",choices=["几乎每天","有四五天","两三天","有一天","从来没有过"])
+    shenghuoyiyi = models.StringField(label="35、过去一周，您认为生活没有意义的频率？",choices=["几乎每天","有四五天","两三天","有一天","从来没有过"])
+     
 
 
 
     changyongshou = models.StringField(label="3、您的常用手？",choices=["左手","右手"])
-    city = models.StringField(label="4、您来自于哪个城市？")
     jianzhi = models.StringField(label="6、您是否曾经兼职过？",choices=["是","否"])
     major = models.StringField(label="7、您的专业是？")
-    fuqinedu = models.StringField(label="8、您父亲的教育程度？",choices=["小学","初中","高中","本科","研究生及以上"])
-    muqinedu = models.StringField(label="9、您母亲的教育程度？",choices=["小学","初中","高中","本科","研究生及以上"])
-    
     xiaofei = models.IntegerField(label="11、您月消费？")
     xianxue = models.StringField(label="12、您是否主动献血过？",choices=["是","否"])
     xianxuetime = models.IntegerField(label="13、您的献血次数？",min=0)
@@ -75,7 +79,9 @@ class Player(BasePlayer):
 class MyPage(Page):
     form_model = 'player'
 #    form_fields = ['male', 'age','minzu','changyongshou','city','ganbu','jianzhi','major','fuqinedu','muqinedu','shouru','xiaofei','xianxue','xianxuetime','juankuan','experience','shehuidiwei','banjidiwei']
-    form_fields = ['male', 'age','minzu', 'chushengdi', 'hukoudi', 'xiaoxuedi','chuzhongdi','gaozhongdi']
+    form_fields = ['male', 'age','minzu', 'chushengdi', 'hukoudi', 'xiaoxuedi','chuzhongdi','gaozhongdi','shouru','xiongdi','fuage','muage','fumuhukoudi','hukouleixing',
+                    'fuedu','muedu','fuwork','muwork','xingquaihao','shetuan','shetuantezheng','dangyuan','ganbu','xueshenghui','ziranzaihai','taifengpinlv','xinqing','yumen',
+                    'jinzhang','zuolibuan','meixiwang','kunnan','shenghuoyiyi','changyongshou','jianzhi','major','xiaofei','xianxue','xianxuetime','juankuan','experience','shehuidiwei','banjidiwei']
 
 
 class ResultsWaitPage(WaitPage):
