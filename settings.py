@@ -5,7 +5,7 @@ SESSION_CONFIGS = [
     dict(
         name='7_experiments',
         display_name="7 experiments",
-        app_sequence=['temporal_discounting', 'payment_info'],
+        app_sequence=['questionnaire', 'payment_info'],
         num_demo_participants=2,
     ),
 #    dict(
