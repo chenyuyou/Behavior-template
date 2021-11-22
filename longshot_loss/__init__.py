@@ -90,7 +90,7 @@ class Stimuli(Page):
                 payoff = -trial.lottery_low
         else:
             payoff = -trial.sure_payoff
-        player.payoff = -payoff
+        player.payoff = payoff
 
 
 class Results(Page):

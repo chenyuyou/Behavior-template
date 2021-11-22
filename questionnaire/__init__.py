@@ -52,7 +52,7 @@ class Player(BasePlayer):
     ganbu = models.StringField(label="25、您是否为学生干部？",choices=["是","否"])
     xueshenghui = models.StringField(label="26、您是校（院）学生会成员么？",choices=["是","否"])
     ziranzaihai = models.StringField(label="27、您家乡面临的自然死亡风险是什么？",choices=["地震","水灾","台风","雪灾"])
-    taifengpinlv = models.StringField(label="28、您上大学前经历的台风多么？",choices=["没有","一年一次","一年两次","一年三次","一年四次及以上"])
+    taifengpinlv = models.StringField(label="28、您上大学前经历的台风多么？",choices=["没有","较少，几年才一次","一年一次","一年两次","一年三次","一年四次及以上"])
     xinqing = models.StringField(label="29、您今天的心情怎么样？",choices=["非常开心","开心","不好不坏","不开心","非常不开心"])
     yumen = models.StringField(label="30、过去一周，你感到沮丧、郁闷，做什么事情都不能振奋的频率？",choices=["几乎每天","有四五天","两三天","有一天","从来没有过"])
     jinzhang = models.StringField(label="31、过去一周，你感到精神紧张的频率？",choices=["几乎每天","有四五天","两三天","有一天","从来没有过"])
@@ -64,22 +64,22 @@ class Player(BasePlayer):
 
 
 
-    changyongshou = models.StringField(label="3、您的常用手？",choices=["左手","右手"])
-    jianzhi = models.StringField(label="6、您是否曾经兼职过？",choices=["是","否"])
-    major = models.StringField(label="7、您的专业是？")
-    xiaofei = models.IntegerField(label="11、您月消费？")
-    xianxue = models.StringField(label="12、您是否主动献血过？",choices=["是","否"])
-    xianxuetime = models.IntegerField(label="13、您的献血次数？",min=0)
-    juankuan = models.StringField(label="14、您是否主动捐款过？",choices=["是","否"])
-    experience = models.StringField(label="15、您是否参加过类似实验？",choices=["是","否"])
-    shehuidiwei = models.IntegerField(label="16、如果社会最顶层用10表示，最底层用1表示，您认为自己属于什么社会位置？", min=1,max=10)
-    banjidiwei = models.IntegerField(label="17、班级中，如果最顶层用10表示，最底层用1表示，您认为自己属于什么班级位置？", min=1,max=10)
+    changyongshou = models.StringField(label="36、您的常用手？",choices=["左手","右手"])
+    jianzhi = models.StringField(label="37、您是否曾经兼职过？",choices=["是","否"])
+    major = models.StringField(label="38、您的专业是？")
+    xiaofei = models.IntegerField(label="38、您月消费？")
+    xianxue = models.StringField(label="39、您是否主动献血过？",choices=["是","否"])
+    xianxuetime = models.IntegerField(label="40、您的献血次数？",min=0)
+    juankuan = models.StringField(label="41、您是否主动捐款过？",choices=["是","否"])
+    experience = models.StringField(label="42、您是否参加过类似实验？",choices=["是","否"])
+    shehuidiwei = models.IntegerField(label="43、如果社会最顶层用10表示，最底层用1表示，您认为自己属于什么社会位置？", min=1,max=10)
+    banjidiwei = models.IntegerField(label="44、班级中，如果最顶层用10表示，最底层用1表示，您认为自己属于什么班级位置？", min=1,max=10)
 
 
 class MyPage(Page):
     form_model = 'player'
 #    form_fields = ['male', 'age','minzu','changyongshou','city','ganbu','jianzhi','major','fuqinedu','muqinedu','shouru','xiaofei','xianxue','xianxuetime','juankuan','experience','shehuidiwei','banjidiwei']
-    form_fields = ['male', 'age','minzu', 'chushengdi', 'hukoudi', 'xiaoxuedi','chuzhongdi','gaozhongdi','shouru','xiongdi','fuage','muage','fumuhukoudi','hukouleixing',
+    form_fields = ['male', 'age','minzu', 'chushengdi', 'hukoudi', 'xiaoxuedi','chuzhongdi','gaozhongdi','gaokaochengji','shouru','xiongdi','fuage','muage','fumuhukoudi','hukouleixing',
                     'fuedu','muedu','fuwork','muwork','xingquaihao','shetuan','shetuantezheng','dangyuan','ganbu','xueshenghui','ziranzaihai','taifengpinlv','xinqing','yumen',
                     'jinzhang','zuolibuan','meixiwang','kunnan','shenghuoyiyi','changyongshou','jianzhi','major','xiaofei','xianxue','xianxuetime','juankuan','experience','shehuidiwei','banjidiwei']
 

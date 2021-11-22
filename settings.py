@@ -3,9 +3,11 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='7_experiments',
-        display_name="7 experiments",
-        app_sequence=['questionnaire', 'payment_info'],
+        name='new_experiments',
+        display_name="new experiments",
+#        app_sequence=['questionnaire', 'payment_info'],
+        app_sequence=['seat'],
+#        app_sequence=['even-chance_gain','longshot_gain','even-chance_loss','longshot_loss','gain_ambiguity','loss_ambiguity','temporal_discounting','dictator_game','ultimatum_game','sequential_prisoners_dilemma','public_goods_game','questionnaire', 'payment_info'],
         num_demo_participants=2,
     ),
 #    dict(
@@ -35,7 +37,7 @@ OTREE_AUTH_LEVEL = "STUDY"
 
 # e.g. EUR, GBP, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'CNY'
-USE_POINTS = False
+USE_POINTS = True
 
 ROOMS = [
     dict(
