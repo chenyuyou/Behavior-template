@@ -25,6 +25,7 @@ class Player(BasePlayer):
     male = models.StringField(label="1、您的性别？",choices=["男","女"])
     age = models.IntegerField(label="2、您的年纪？",min=14,max=99)
     minzu = models.StringField(label="3、您的民族？")
+    identification = models.StringField(label="3、您的身份证号码？")
     chushengdi=models.StringField(label="4、您的出生地？请按照xx省xx市xx区（县）填写")
     hukoudi=models.StringField(label="5、您的户口登记地？请按照xx省xx市xx区（县）填写")
     sansuidi=models.StringField(label="6、您三岁时居住地在哪？请按照xx省xx市xx区（县）填写")
@@ -79,7 +80,7 @@ class Player(BasePlayer):
 class MyPage(Page):
     form_model = 'player'
 #    form_fields = ['male', 'age','minzu','changyongshou','city','ganbu','jianzhi','major','fuqinedu','muqinedu','shouru','xiaofei','xianxue','xianxuetime','juankuan','experience','shehuidiwei','banjidiwei']
-    form_fields = ['male', 'age','minzu', 'chushengdi', 'hukoudi', 'xiaoxuedi','chuzhongdi','gaozhongdi','gaokaochengji','shouru','xiongdi','fuage','muage','fumuhukoudi','hukouleixing',
+    form_fields = ['male', 'age','minzu', 'identification', 'chushengdi', 'hukoudi', 'xiaoxuedi','chuzhongdi','gaozhongdi','gaokaochengji','shouru','xiongdi','fuage','muage','fumuhukoudi','hukouleixing',
                     'fuedu','muedu','fuwork','muwork','xingquaihao','shetuan','shetuantezheng','dangyuan','ganbu','xueshenghui','ziranzaihai','taifengpinlv','xinqing','yumen',
                     'jinzhang','zuolibuan','meixiwang','kunnan','shenghuoyiyi','changyongshou','jianzhi','major','xiaofei','xianxue','xianxuetime','juankuan','experience','shehuidiwei','banjidiwei']
 

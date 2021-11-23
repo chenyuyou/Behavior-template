@@ -1,12 +1,17 @@
 from os import environ
+import random
 
+a = ['even-chance_gain','longshot_gain','even-chance_loss','longshot_loss','gain_ambiguity','loss_ambiguity','temporal_discounting','dictator_game','ultimatum_game','sequential_prisoners_dilemma','public_goods_game']
+random.shuffle(a)
 
+b= ['seat']+a+['questionnaire', 'payment_info']
 SESSION_CONFIGS = [
     dict(
         name='new_experiments',
         display_name="new experiments",
 #        app_sequence=['questionnaire', 'payment_info'],
-        app_sequence=['seat'],
+#        app_sequence=['even-chance_loss'],
+        app_sequence=b,
 #        app_sequence=['even-chance_gain','longshot_gain','even-chance_loss','longshot_loss','gain_ambiguity','loss_ambiguity','temporal_discounting','dictator_game','ultimatum_game','sequential_prisoners_dilemma','public_goods_game','questionnaire', 'payment_info'],
         num_demo_participants=2,
     ),
