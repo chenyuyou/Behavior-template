@@ -22,20 +22,36 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    male = models.StringField(label="1、您的性别？",choices=["男","女"])
-    age = models.IntegerField(label="2、您的年纪？",min=14,max=99)
-    minzu = models.StringField(label="3、您的民族？")
-    identification = models.StringField(label="3、您的身份证号码？")
-    chushengdi=models.StringField(label="4、您的出生地？请按照xx省xx市xx区（县）填写")
-    hukoudi=models.StringField(label="5、您的户口登记地？请按照xx省xx市xx区（县）填写")
-    sansuidi=models.StringField(label="6、您三岁时居住地在哪？请按照xx省xx市xx区（县）填写")
-    xiaoxuedi=models.StringField(label="7、您小学在哪里上的？请按照xx省xx市xx区（县）填写")
-    chuzhongdi=models.StringField(label="8、您初中在哪里上的？请按照xx省xx市xx区（县）填写")
-    gaozhongdi=models.StringField(label="9、您高中在哪里上的？请按照xx省xx市xx区（县）填写")
-    gaokaochengji = models.StringField(label="10、您的高考各科成绩以及全省排名")
+    male = models.StringField()
+    year_month = models.StringField()
+    identification = models.StringField()
+    birth_province=models.StringField()
+    birth_city=models.StringField()
+    birth_district=models.StringField()
+    hukou_province=models.StringField()
+    hukou_city=models.StringField()
+    hukou_district=models.StringField()
+    three_province=models.StringField()
+    three_city=models.StringField()
+    three_district=models.StringField()
+    primary_province=models.StringField()
+    primary_city=models.StringField()
+    primary_district=models.StringField()
+    junior_province=models.StringField()
+    junior_city=models.StringField()
+    junior_district=models.StringField()
+    high_province=models.StringField()
+    high_city=models.StringField()
+    high_district=models.StringField()
+    language_score=models.StringField()
+    math_score=models.StringField()
+    english_score=models.StringField()
+    other_score=models.StringField()
+    provincial_ranking=models.StringField()
+    household_income = models.StringField()
+    brother_sister = models.IntegerField()
 
-    shouru = models.IntegerField(label="11、您的家庭年收入？")
-    xiongdi = models.IntegerField(label="12、您有几个兄弟姐妹？",min=0)
+   
     fuage = models.IntegerField(label="13、您父亲的年龄？",min=0)
     muage = models.IntegerField(label="14、您母亲的年龄？",min=0)
     fumuhukoudi=models.StringField(label="15、您父母的户口登记地？请按照xx省xx市xx区（县）填写")
@@ -84,6 +100,12 @@ class MyPage(Page):
                     'fuedu','muedu','fuwork','muwork','xingquaihao','shetuan','shetuantezheng','dangyuan','ganbu','xueshenghui','ziranzaihai','taifengpinlv','xinqing','yumen',
                     'jinzhang','zuolibuan','meixiwang','kunnan','shenghuoyiyi','changyongshou','jianzhi','major','xiaofei','xianxue','xianxuetime','juankuan','experience','shehuidiwei','banjidiwei']
 
+class QPage(Page):
+    form_model = 'player'
+    form_fields = ['brother_sister']
+#   form_fields = ['male','year_month','identification','birth_province','birth_city','birth_district','hukou_province','hukou_city','hukou_district','three_province','three_city','three_district','primary_province',
+#    'primary_city','primary_district','junior_province','junior_city','junior_district','high_province','high_city','high_district','language_score','math_score','english_score','other_score','provincial_ranking',
+#    'household_income']
 
 class ResultsWaitPage(WaitPage):
     pass
@@ -93,4 +115,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [MyPage, ResultsWaitPage, Results]
+page_sequence = [QPage, ResultsWaitPage, Results]

@@ -1,0 +1,880 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    调查问卷
+{% endblock %}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" charset="UTF-8"></script>
+
+
+<div class='.container-fluid'>
+
+<!--
+
+<p>1、您的性别？</p>
+<select class="form-select form-select-sm" aria-label="Default select example", name='male'>
+  <option value="男">男</option>
+  <option value="女">女</option>
+</select>
+
+<p>2、您的出生年月？</p>
+<input type="month"  name="year_month">
+
+<p>3、您的身份证号码？</p>
+<input class="form-control form-control-sm" type="text" name='identification' >
+
+
+<p>4、您的出生地是？</p>
+<div class="input-group">
+  <input type="text" aria-label="省" class="form-control" name='birth_province'>
+  <span class="input-group-text">省</span>
+  <input type="text" aria-label="市" class="form-control" name='birth_city'>
+  <span class="input-group-text">市</span>
+  <input type="text" aria-label="区县" class="form-control" name='birth_district'>
+  <span class="input-group-text">区县</span>
+</div>
+
+<p>5、您的户口所在地是？</p>
+<div class="input-group">
+  <input type="text" aria-label="省" class="form-control" name='hukou_province'>
+  <span class="input-group-text">省</span>
+  <input type="text" aria-label="市" class="form-control" name='hukou_city'>
+  <span class="input-group-text">市</span>
+  <input type="text" aria-label="区县" class="form-control" name='hukou_district'>
+  <span class="input-group-text">区县</span>
+</div>
+
+<p>6、您3岁时的居住地是？</p>
+<div class="input-group">
+  <input type="text" aria-label="省" class="form-control" name='three_province'>
+  <span class="input-group-text">省</span>
+  <input type="text" aria-label="市" class="form-control" name='three_city'>
+  <span class="input-group-text">市</span>
+  <input type="text" aria-label="区县" class="form-control" name='three_district'>
+  <span class="input-group-text">区县</span>
+</div>
+
+
+<p>7、您小学时哪里上的？</p>
+<div class="input-group">
+  <input type="text" aria-label="省" class="form-control" name='primary_province'>
+  <span class="input-group-text">省</span>
+  <input type="text" aria-label="市" class="form-control" name='primary_city'>
+  <span class="input-group-text">市</span>
+  <input type="text" aria-label="区县" class="form-control" name='primary_district'>
+  <span class="input-group-text">区县</span>
+</div>
+
+<p>8、您初中时哪里上的？</p>
+<div class="input-group">
+  <input type="text" aria-label="省" class="form-control" name='junior_province'>
+  <span class="input-group-text">省</span>
+  <input type="text" aria-label="市" class="form-control" name='junior_city'>
+  <span class="input-group-text">市</span>
+  <input type="text" aria-label="区县" class="form-control" name='junior_district'>
+  <span class="input-group-text">区县</span>
+</div>
+
+<p>9、您高中是哪里上的？</p>
+<div class="input-group">
+  <input type="text" aria-label="省" class="form-control" name='high_province'>
+  <span class="input-group-text">省</span>
+  <input type="text" aria-label="市" class="form-control" name='high_city'>
+  <span class="input-group-text">市</span>
+  <input type="text" aria-label="区县" class="form-control" name='high_district'>
+  <span class="input-group-text">区县</span>
+</div>
+
+
+<p>10、您的高考各科成绩和排名？</p>
+<div class="input-group">
+  <span class="input-group-text">语文</span>
+  <input type="text" aria-label="语文" class="form-control" name='language_score'>
+  <span class="input-group-text">数学</span>
+  <input type="text" aria-label="数学" class="form-control" name='math_score'>
+  <span class="input-group-text">英语</span>
+  <input type="text" aria-label="英语" class="form-control" name='english_score'>
+  <span class="input-group-text">综合或其他</span>
+  <input type="text" aria-label="综合或其他" class="form-control" name='other_score'>
+  <span class="input-group-text">全省排名</span>
+  <input type="text" aria-label="全省排名" class="form-control" name='provincial_ranking'>
+</div>
+
+
+<p>11、请问您的家庭年收入大约是？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="household_income" id="household_income1" value='1'>
+  <label class="form-check-label" for="household_income1" >
+    5万元以下
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="household_income" id="household_income2" value='2'>
+  <label class="form-check-label" for="household_income2">
+    5万-15万元
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="household_income" id="household_income3" value='3'>
+  <label class="form-check-label" for="household_income3">
+    15万-25万
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="household_income" id="household_income4" value='4'>
+  <label class="form-check-label" for="household_income4">
+    25万-35万
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="household_income" id="household_income5" value='5'>
+  <label class="form-check-label" for="household_income5">
+    35万-45万
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="household_income" id="household_income6" value='6'>
+  <label class="form-check-label" for="household_income6">
+    45万-55万
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="household_income" id="household_income7" value='7'>
+  <label class="form-check-label" for="household_income7">
+    55万以上
+  </label>
+</div>
+//-->
+
+<p>12、您有几个兄弟姐妹？（没有请填写0）</p>
+<input class="form-control form-control-sm" type="text" name='brother_sister' >
+
+
+<p>13、您父亲的年龄？</p>
+<input class="form-control form-control-sm" type="text" name='father_age' >
+
+<p>14、您母亲的年龄？</p>
+<input class="form-control form-control-sm" type="text" name='mother_age' >
+
+<p>15、您父母的户口所在地？</p>
+<div class="input-group">
+  <input type="text" aria-label="省" class="form-control" name='family_province'>
+  <span class="input-group-text">省</span>
+  <input type="text" aria-label="市" class="form-control" name='family_city'>
+  <span class="input-group-text">市</span>
+  <input type="text" aria-label="区县" class="form-control" name='family_district'>
+  <span class="input-group-text">区县</span>
+</div>
+
+<p>16、您父母的户口类型？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="hukou_type" id="hukou_type1" value='1'>
+  <label class="form-check-label" for="hukou_type1" >
+    农业户口
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="hukou_type" id="hukou_type2" value='2'>
+  <label class="form-check-label" for="hukou_type2">
+    非农户口
+  </label>
+</div>
+
+
+<p>17、您父亲的受教育水平？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu1" value='1'>
+  <label class="form-check-label" for="father_edu1" >
+    没有受过任何教育
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='2'>
+  <label class="form-check-label" for="father_edu2">
+    小学
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='3'>
+  <label class="form-check-label" for="father_edu3">
+    初中
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='4'>
+  <label class="form-check-label" for="father_edu4">
+    中专/技校
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='5'>
+  <label class="form-check-label" for="father_edu5">
+    职业高中
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='6'>
+  <label class="form-check-label" for="father_edu6">
+    高中
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='7'>
+  <label class="form-check-label" for="father_edu7">
+    大学专科
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='8'>
+  <label class="form-check-label" for="father_edu8">
+    大学本科
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='9'>
+  <label class="form-check-label" for="father_edu9">
+    研究生及以上
+  </label>
+</div>
+
+
+<p>17、您母亲的受教育水平？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu1" value='1'>
+  <label class="form-check-label" for="mother_edu1" >
+    没有受过任何教育
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='2'>
+  <label class="form-check-label" for="mother_edu2">
+    小学
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='3'>
+  <label class="form-check-label" for="mother_edu3">
+    初中
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='4'>
+  <label class="form-check-label" for="mother_edu4">
+    中专/技校
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='5'>
+  <label class="form-check-label" for="mother_edu5">
+    职业高中
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='6'>
+  <label class="form-check-label" for="mother_edu6">
+    高中
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='7'>
+  <label class="form-check-label" for="mother_edu7">
+    大学专科
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='8'>
+  <label class="form-check-label" for="mother_edu8">
+    大学本科
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='9'>
+  <label class="form-check-label" for="mother_edu9">
+    研究生及以上
+  </label>
+</div>
+
+<p>19、您父亲的工作类型？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work1" value='1'>
+  <label class="form-check-label" for="father_work1" >
+    国家机关事业单位领导与工作人员
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='2'>
+  <label class="form-check-label" for="father_work2">
+    企业/公司中高级管理人员
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='3'>
+  <label class="form-check-label" for="father_work3">
+    初中教师、工程师、医生、律师
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='4'>
+  <label class="form-check-label" for="father_work4">
+    技术工人（包括司机）
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='5'>
+  <label class="form-check-label" for="father_work5">
+    生产与制造业一般职工
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='6'>
+  <label class="form-check-label" for="father_work6">
+    商业与服务业一般职工
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='7'>
+  <label class="form-check-label" for="father_work7">
+    农民
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='8'>
+  <label class="form-check-label" for="father_work8">
+    无业、失业、下岗大学
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='9'>
+  <label class="form-check-label" for="father_edu9">
+    渔民
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='10'>
+  <label class="form-check-label" for="father_edu10">
+    其他
+  </label>
+</div>
+
+
+<p>20、您母亲的工作类型？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work1" value='1'>
+  <label class="form-check-label" for="mother_work1" >
+    国家机关事业单位领导与工作人员
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='2'>
+  <label class="form-check-label" for="mother_work2">
+    企业/公司中高级管理人员
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='3'>
+  <label class="form-check-label" for="mother_work3">
+    初中教师、工程师、医生、律师
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='4'>
+  <label class="form-check-label" for="mother_work4">
+    技术工人（包括司机）
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='5'>
+  <label class="form-check-label" for="mother_work5">
+    生产与制造业一般职工
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='6'>
+  <label class="form-check-label" for="mother_work6">
+    商业与服务业一般职工
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='7'>
+  <label class="form-check-label" for="mother_work7">
+    农民
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='8'>
+  <label class="form-check-label" for="mother_work8">
+    无业、失业、下岗大学
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='9'>
+  <label class="form-check-label" for="father_edu9">
+    渔民
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='10'>
+  <label class="form-check-label" for="father_edu10">
+    其他
+  </label>
+</div>
+
+<p>21、您平时最大的兴趣爱好？</p>
+<input class="form-control form-control-sm" type="text" name='interests' >
+
+<p>22、您参加社团的名称？</p>
+<input class="form-control form-control-sm" type="text" name='societies_name' >
+
+<p>23、您所在的社团具有以下哪个特征？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="societies_feature" id="society1" value='1'>
+  <label class="form-check-label" for="society1" >
+    团队合作和集体主义要求高于个人表现（主义）
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="societies_feature" id="society2" value='2'>
+  <label class="form-check-label" for="society2">
+    个人表现(主义)胜过团队合作团队合作和集体主义
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="societies_feature" id="society2" value='3'>
+  <label class="form-check-label" for="society3">
+    两者都强调
+  </label>
+</div>
+
+<p>24、您是党员么？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="party_member" id="party_member1" value='1'>
+  <label class="form-check-label" for="party_member1" >
+    是
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="party_member" id="party_member2" value='2'>
+  <label class="form-check-label" for="party_member2">
+    否
+  </label>
+</div>
+
+<p>25、您是班干部么？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="class_leader" id="class_leader1" value='1'>
+  <label class="form-check-label" for="class_leader1" >
+    是
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="party_member" id="class_leader2" value='2'>
+  <label class="form-check-label" for="class_leader2">
+    否
+  </label>
+</div>
+
+<p>26、你是校（院）学生会成员吗？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="student_union" id="student_union1" value='1'>
+  <label class="form-check-label" for="student_union1" >
+    是
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="student_union" id="student_union2" value='2'>
+  <label class="form-check-label" for="student_union2">
+    否
+  </label>
+</div>
+
+<p>27、生活在你们家乡面临的自然死亡风险时什么？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="death_risk" id="death_risk1" value='1'>
+  <label class="form-check-label" for="death_risk1" >
+    地震
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="death_risk" id="death_risk2" value='2'>
+  <label class="form-check-label" for="death_risk2">
+    水灾
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="death_risk" id="death_risk3" value='3'>
+  <label class="form-check-label" for="death_risk3">
+    台风
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="death_risk" id="death_risk4" value='4'>
+  <label class="form-check-label" for="death_risk4">
+    雪灾
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="death_risk" id="death_risk5" value='5'>
+  <label class="form-check-label" for="death_risk5">
+    火灾
+  </label>
+</div>
+
+<p>28、您上大学前经历的台风多吗？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="typhoon_risk" id="typhoon_risk1" value='1'>
+  <label class="form-check-label" for="typhoon_risk1" >
+    没有
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="typhoon_risk" id="typhoon_risk2" value='2'>
+  <label class="form-check-label" for="typhoon_risk2">
+    平均一年一次
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="typhoon_risk" id="typhoon_risk3" value='3'>
+  <label class="form-check-label" for="typhoon_risk3">
+    平均一年二次
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="typhoon_risk" id="typhoon_risk4" value='4'>
+  <label class="form-check-label" for="typhoon_risk4">
+    平均一年三次
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="typhoon_risk" id="typhoon_risk5" value='5'>
+  <label class="form-check-label" for="typhoon_risk5">
+    平均一年四次以上
+  </label>
+</div>
+
+
+<p>29、您今天的心情怎么样？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="feeling" id="feeling1" value='1'>
+  <label class="form-check-label" for="feeling1" >
+    非常开心
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="feeling" id="feeling2" value='2'>
+  <label class="form-check-label" for="feeling2">
+    开心
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="feeling" id="feeling3" value='3'>
+  <label class="form-check-label" for="feeling3">
+    不好不坏
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="feeling" id="feeling4" value='4'>
+  <label class="form-check-label" for="feeling4">
+   不开心
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="feeling" id="feeling5" value='5'>
+  <label class="form-check-label" for="feeling5">
+    非常不开心
+  </label>
+</div>
+
+<p>30、过去一周，你感到情绪沮丧，郁闷，做什么事情都不能振奋的频率？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="frustrated" id="frustrated1" value='1'>
+  <label class="form-check-label" for="frustrated1" >
+    几乎每天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="frustrated" id="frustrated2" value='2'>
+  <label class="form-check-label" for="frustrated2">
+    有四五天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="frustrated" id="frustrated3" value='3'>
+  <label class="form-check-label" for="frustrated3">
+    两三天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="frustrated" id="frustrated4" value='4'>
+  <label class="form-check-label" for="frustrated4">
+   有一天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="frustrated" id="frustrated5" value='5'>
+  <label class="form-check-label" for="frustrated5">
+    从来没有
+  </label>
+</div>
+
+<p>31、过去一周，你感到精神紧张的频率？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nervous" id="nervous1" value='1'>
+  <label class="form-check-label" for="nervous1" >
+    几乎每天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nervous" id="nervous2" value='2'>
+  <label class="form-check-label" for="nervous2">
+    有四五天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nervous" id="nervous3" value='3'>
+  <label class="form-check-label" for="nervous3">
+    两三天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nervous" id="nervous4" value='4'>
+  <label class="form-check-label" for="nervous4">
+   有一天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nervous" id="nervous5" value='5'>
+  <label class="form-check-label" for="nervous5">
+    从来没有
+  </label>
+</div>
+
+
+<p>32、过去一周，你感到坐卧不安、难以保持平静的频率？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="not_calm" id="not_calm1" value='1'>
+  <label class="form-check-label" for="not_calm1" >
+    几乎每天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="not_calm" id="not_calm2" value='2'>
+  <label class="form-check-label" for="not_calm2">
+    有四五天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="not_calm" id="not_calm3" value='3'>
+  <label class="form-check-label" for="not_calm3">
+    两三天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="not_calm" id="not_calm4" value='4'>
+  <label class="form-check-label" for="not_calm4">
+   有一天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="not_calm" id="not_calm5" value='5'>
+  <label class="form-check-label" for="not_calm5">
+    从来没有
+  </label>
+</div>
+
+<p>33、过去一周，你感到未来没有希望的频率？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="hopeless" id="hopeless1" value='1'>
+  <label class="form-check-label" for="hopeless1" >
+    几乎每天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="hopeless" id="hopeless2" value='2'>
+  <label class="form-check-label" for="hopeless2">
+    有四五天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="hopeless" id="hopeless3" value='3'>
+  <label class="form-check-label" for="hopeless3">
+    两三天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="hopeless" id="hopeless4" value='4'>
+  <label class="form-check-label" for="hopeless4">
+   有一天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="hopeless" id="hopeless5" value='5'>
+  <label class="form-check-label" for="hopeless5">
+    从来没有
+  </label>
+</div>
+
+
+
+<p>34、过去一周，你做任何事情都感到困难的频率？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="difficulty" id="difficulty1" value='1'>
+  <label class="form-check-label" for="difficulty1" >
+    几乎每天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="difficulty" id="difficulty2" value='2'>
+  <label class="form-check-label" for="difficulty2">
+    有四五天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="difficulty" id="difficulty3" value='3'>
+  <label class="form-check-label" for="difficulty3">
+    两三天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="difficulty" id="difficulty4" value='4'>
+  <label class="form-check-label" for="difficulty4">
+   有一天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="difficulty" id="difficulty5" value='5'>
+  <label class="form-check-label" for="difficulty5">
+    从来没有
+  </label>
+</div>
+
+
+<p>35、过去一周，你认为生活没有意义的频率？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="no_meaning" id="no_meaning1" value='1'>
+  <label class="form-check-label" for="no_meaning1" >
+    几乎每天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="no_meaning" id="no_meaning2" value='2'>
+  <label class="form-check-label" for="no_meaning2">
+    有四五天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="no_meaning" id="no_meaning3" value='3'>
+  <label class="form-check-label" for="no_meaning3">
+    两三天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="no_meaning" id="no_meaning4" value='4'>
+  <label class="form-check-label" for="no_meaning4">
+   有一天
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="no_meaning" id="no_meaning5" value='5'>
+  <label class="form-check-label" for="no_meaning5">
+    从来没有
+  </label>
+</div>
+
+
+<p>36、您的常用手？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="dominant_hand" id="dominant_hand1" value='1'>
+  <label class="form-check-label" for="dominant_hand1" >
+  左手
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="dominant_hand" id="dominant_hand2" value='2'>
+  <label class="form-check-label" for="dominant_hand2">
+    右手
+  </label>
+</div>
+
+<p>37、您是否曾经兼职过？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="part_time" id="part_time1" value='1'>
+  <label class="form-check-label" for="part_time1" >
+    是
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="part_time" id="part_time2" value='2'>
+  <label class="form-check-label" for="part_time2">
+    否
+  </label>
+</div>
+
+<p>38、您的专业是？</p>
+<input class="form-control form-control-sm" type="text" name='major' >
+
+
+<p>39、您月消费？</p>
+<input class="form-control form-control-sm" type="text" name='consumption' >
+
+
+<p>40、您是否主动献血过？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="donate_blood" id="donate_blood1" value='1'>
+  <label class="form-check-label" for="donate_blood1" >
+    是
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="donate_blood" id="donate_blood2" value='2'>
+  <label class="form-check-label" for="donate_blood2">
+    否
+  </label>
+</div>
+
+<p>41、您的献血次数？</p>
+<input class="form-control form-control-sm" type="text" name='donate_blood_num' >
+
+<p>42、您是否主动捐款过？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="donate" id="donate1" value='1'>
+  <label class="form-check-label" for="donate1" >
+    是
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="donate" id="donate2" value='2'>
+  <label class="form-check-label" for="donate2">
+    否
+  </label>
+</div>
+
+<p>43、您是否参加过类似实验？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="experiment" id="experiment1" value='1'>
+  <label class="form-check-label" for="experiment1" >
+    是
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="experiment" id="experiment2" value='2'>
+  <label class="form-check-label" for="experiment2">
+    否
+  </label>
+</div>
+
+<p>44、如果社会最顶层用10表示，最底层用1表示，您认为自己属于什么社会位？</p>
+<input class="form-control form-control-sm" type="text" name='social_status' >
+
+<p>45、班级中，如果最顶层用10表示，最底层用1表示，您认为自己属于什么班级位置？</p>
+<input class="form-control form-control-sm" type="text" name='class_status' >
+
+</div>
+
+{{next_button}}
+
+<script>
+
+</script>
+{% endblock %}
