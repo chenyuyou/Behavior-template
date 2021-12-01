@@ -7,11 +7,33 @@
 
 {% block content %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" charset="UTF-8"></script>
+<script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("#mother_work11").hide();
+  $("#father_work11").hide();
+  $("#nationality9").hide();
+
+  $("#mother_work10").click(function(){
+    $("#mother_work11").show();
+  });
+
+  $("#father_work10").click(function(){
+    $("#father_work11").show();
+  });
+
+  $("#nationality8").click(function(){
+    $("#nationality9").show();
+  });
+});
+</script>
+
 
 
 <div class='.container-fluid'>
 
-<!--
+
 
 <p>1、您的性别？</p>
 <select class="form-select form-select-sm" aria-label="Default select example", name='male'>
@@ -19,11 +41,60 @@
   <option value="女">女</option>
 </select>
 
-<p>2、您的出生年月？</p>
-<input type="month"  name="year_month">
-
-<p>3、您的身份证号码？</p>
+<p>2、您的身份证号码？</p>
 <input class="form-control form-control-sm" type="text" name='identification' >
+
+<p>3、您的民族？</p>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nationality" id="nationality1" value='1'>
+  <label class="form-check-label" for="nationality1" >
+    汉
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nationality" id="nationality2" value='2'>
+  <label class="form-check-label" for="nationality2">
+    满
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nationality" id="nationality3" value='3'>
+  <label class="form-check-label" for="nationality3">
+    蒙
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nationality" id="nationality4" value='4'>
+  <label class="form-check-label" for="nationality4">
+    回
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nationality" id="nationality5" value='5'>
+  <label class="form-check-label" for="nationality5">
+    藏
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nationality" id="nationality6" value='6'>
+  <label class="form-check-label" for="nationality6">
+    壮
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nationality" id="nationality7" value='7'>
+  <label class="form-check-label" for="nationality7">
+    维
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="nationality" id="nationality8" value='8'>
+  <label class="form-check-label" for="nationality8">
+    其他
+  </label>
+  <input type="text" name='nationality_other' id="nationality9" value=' '>
+</div>
+
 
 
 <p>4、您的出生地是？</p>
@@ -89,19 +160,22 @@
 
 
 <p>10、您的高考各科成绩和排名？</p>
-<div class="input-group">
-  <span class="input-group-text">语文</span>
-  <input type="text" aria-label="语文" class="form-control" name='language_score'>
-  <span class="input-group-text">数学</span>
-  <input type="text" aria-label="数学" class="form-control" name='math_score'>
-  <span class="input-group-text">英语</span>
-  <input type="text" aria-label="英语" class="form-control" name='english_score'>
-  <span class="input-group-text">综合或其他</span>
-  <input type="text" aria-label="综合或其他" class="form-control" name='other_score'>
-  <span class="input-group-text">全省排名</span>
-  <input type="text" aria-label="全省排名" class="form-control" name='provincial_ranking'>
+<div class="container">
+  <div class="form-group input-group">
+  <div class="col-2"><span class="input-group-text">语文</span></div>
+  <div class="col-2"><input type="text" aria-label="语文" class="form-control" name='language_score'></div>
+  <div class="col-2"><span class="input-group-text">数学</span></div>
+  <div class="col-2"><input type="text" aria-label="数学" class="form-control" name='math_score'></div>
+  <div class="col-2"><span class="input-group-text">英语</span></div>
+  <div class="col-2"><input type="text" aria-label="英语" class="form-control" name='english_score'></div>
+  </div>
+  <div class="form-group input-group">
+  <div class="col-3"><span class="input-group-text">综合或其他</span></div>
+  <div class="col-3"><input type="text" aria-label="综合或其他" class="form-control" name='other_score'></div>
+  <div class="col-3"><span class="input-group-text">全省排名</span></div>
+  <div class="col-3"><input type="text" aria-label="全省排名" class="form-control" name='provincial_ranking'></div>
+  </div>
 </div>
-
 
 <p>11、请问您的家庭年收入大约是？</p>
 <div class="form-check form-check-inline">
@@ -146,7 +220,7 @@
     55万以上
   </label>
 </div>
-//-->
+
 
 <p>12、您有几个兄弟姐妹？（没有请填写0）</p>
 <input class="form-control form-control-sm" type="text" name='brother_sister' >
@@ -157,6 +231,9 @@
 
 <p>14、您母亲的年龄？</p>
 <input class="form-control form-control-sm" type="text" name='mother_age' >
+
+
+
 
 <p>15、您父母的户口所在地？</p>
 <div class="input-group">
@@ -197,43 +274,43 @@
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='3'>
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu3" value='3'>
   <label class="form-check-label" for="father_edu3">
     初中
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='4'>
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu4" value='4'>
   <label class="form-check-label" for="father_edu4">
     中专/技校
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='5'>
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu5" value='5'>
   <label class="form-check-label" for="father_edu5">
     职业高中
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='6'>
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu6" value='6'>
   <label class="form-check-label" for="father_edu6">
     高中
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='7'>
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu7" value='7'>
   <label class="form-check-label" for="father_edu7">
     大学专科
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='8'>
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu8" value='8'>
   <label class="form-check-label" for="father_edu8">
     大学本科
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_edu" id="father_edu2" value='9'>
+  <input class="form-check-input" type="radio" name="father_edu" id="father_edu9" value='9'>
   <label class="form-check-label" for="father_edu9">
     研究生及以上
   </label>
@@ -254,47 +331,49 @@
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='3'>
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu3" value='3'>
   <label class="form-check-label" for="mother_edu3">
     初中
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='4'>
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu4" value='4'>
   <label class="form-check-label" for="mother_edu4">
     中专/技校
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='5'>
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu5" value='5'>
   <label class="form-check-label" for="mother_edu5">
     职业高中
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='6'>
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu6" value='6'>
   <label class="form-check-label" for="mother_edu6">
     高中
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='7'>
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu7" value='7'>
   <label class="form-check-label" for="mother_edu7">
     大学专科
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='8'>
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu8" value='8'>
   <label class="form-check-label" for="mother_edu8">
     大学本科
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu2" value='9'>
+  <input class="form-check-input" type="radio" name="mother_edu" id="mother_edu9" value='9'>
   <label class="form-check-label" for="mother_edu9">
     研究生及以上
   </label>
 </div>
+
+
 
 <p>19、您父亲的工作类型？</p>
 <div class="form-check form-check-inline">
@@ -310,52 +389,53 @@
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='3'>
+  <input class="form-check-input" type="radio" name="father_work" id="father_work3" value='3'>
   <label class="form-check-label" for="father_work3">
     初中教师、工程师、医生、律师
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='4'>
+  <input class="form-check-input" type="radio" name="father_work" id="father_work4" value='4'>
   <label class="form-check-label" for="father_work4">
     技术工人（包括司机）
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='5'>
+  <input class="form-check-input" type="radio" name="father_work" id="father_work5" value='5'>
   <label class="form-check-label" for="father_work5">
     生产与制造业一般职工
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='6'>
+  <input class="form-check-input" type="radio" name="father_work" id="father_work6" value='6'>
   <label class="form-check-label" for="father_work6">
     商业与服务业一般职工
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='7'>
+  <input class="form-check-input" type="radio" name="father_work" id="father_work7" value='7'>
   <label class="form-check-label" for="father_work7">
     农民
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='8'>
+  <input class="form-check-input" type="radio" name="father_work" id="father_work8" value='8'>
   <label class="form-check-label" for="father_work8">
     无业、失业、下岗大学
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='9'>
-  <label class="form-check-label" for="father_edu9">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work9" value='9'>
+  <label class="form-check-label" for="father_work9">
     渔民
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="father_work" id="father_work2" value='10'>
-  <label class="form-check-label" for="father_edu10">
+  <input class="form-check-input" type="radio" name="father_work" id="father_work10" value='10'>
+  <label class="form-check-label" for="father_work10">
     其他
   </label>
+  <input type="text" name='father_work_other' id="father_work11" value=' '>
 </div>
 
 
@@ -373,53 +453,61 @@
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='3'>
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work3" value='3'>
   <label class="form-check-label" for="mother_work3">
     初中教师、工程师、医生、律师
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='4'>
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work4" value='4'>
   <label class="form-check-label" for="mother_work4">
     技术工人（包括司机）
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='5'>
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work5" value='5'>
   <label class="form-check-label" for="mother_work5">
     生产与制造业一般职工
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='6'>
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work6" value='6'>
   <label class="form-check-label" for="mother_work6">
     商业与服务业一般职工
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='7'>
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work7" value='7'>
   <label class="form-check-label" for="mother_work7">
     农民
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='8'>
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work8" value='8'>
   <label class="form-check-label" for="mother_work8">
     无业、失业、下岗大学
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='9'>
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work9" value='9'>
   <label class="form-check-label" for="father_edu9">
     渔民
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="mother_work" id="mother_work2" value='10'>
-  <label class="form-check-label" for="father_edu10">
+  <input class="form-check-input" type="radio" name="mother_work" id="mother_work10" value='10'>
+  <label class="form-check-label" for="mother_edu10">
     其他
   </label>
-</div>
+<input type="text" name='mother_work_other' id="mother_work11" value=' '>
+</div>    
+
+
+
+
+
+
+
 
 <p>21、您平时最大的兴趣爱好？</p>
 <input class="form-control form-control-sm" type="text" name='interests' >
@@ -441,7 +529,7 @@
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="societies_feature" id="society2" value='3'>
+  <input class="form-check-input" type="radio" name="societies_feature" id="society3" value='3'>
   <label class="form-check-label" for="society3">
     两者都强调
   </label>
@@ -469,7 +557,7 @@
   </label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="party_member" id="class_leader2" value='2'>
+  <input class="form-check-input" type="radio" name="class_leader" id="class_leader2" value='2'>
   <label class="form-check-label" for="class_leader2">
     否
   </label>
@@ -552,6 +640,9 @@
     平均一年四次以上
   </label>
 </div>
+
+
+
 
 
 <p>29、您今天的心情怎么样？</p>
@@ -783,6 +874,8 @@
 </div>
 
 
+
+
 <p>36、您的常用手？</p>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="dominant_hand" id="dominant_hand1" value='1'>
@@ -870,11 +963,15 @@
 <p>45、班级中，如果最顶层用10表示，最底层用1表示，您认为自己属于什么班级位置？</p>
 <input class="form-control form-control-sm" type="text" name='class_status' >
 
+
+
+
 </div>
 
 {{next_button}}
 
-<script>
 
-</script>
+
+
+
 {% endblock %}
