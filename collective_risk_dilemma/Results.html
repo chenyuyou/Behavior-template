@@ -1,0 +1,13 @@
+{{ block title }}结果{{ endblock }}
+{{ block content }}
+<div class="container"> 
+    <ul>
+        <li>你的初始禀赋为{{ Constants.endowment }}。</li>
+        <li>你往公共池中存入{{ player.contribution }}。</li>
+        <li>你所在的组总共往公共池中存入了{{ group.total_contribution }}。</li>
+        <li>因此每个人可以分得{{ group.individual_share }}。</li>
+        <li>因此你的收益为{{ player.payoff }}。</li>
+    </ul>
+</div>      
+
+{{ endblock }}
