@@ -1,9 +1,9 @@
 {{ extends "global/Page.html" }}
-{{ block title }}贡献{{ endblock }}
+{{ block title }}气候风险{{ endblock }}
 {{ block content }}
 <style>
 p { 
-   text-indent: 30px;
+   text-indent: 35px;
 }
 </style>
 
@@ -11,19 +11,20 @@ p {
 
 <div class="container">
     <p>
-        A和B都拥有80点。
-        他（她）们都面临一个决策，从这80点中选择n点（n可以是从0到80点之间任意整数）存入公共池中，剩下的自己保留（保留80-n点）。
-        两人存入公共池的存款的总额将乘以1.6倍。 
-        必须强调的是，在双方在不知道对方决定的情况下做出选择数额存入公共池的决定，且池中的总金额（在存款乘以 1.6 后）将在两人之间平分。   
+        此刻，你参与{{Constants.players_per_group}}人为一组有关气候风险的实验。
+        这个实验共进行{{Constants.num_rounds}}轮，每一轮每人都需要面临一个决策，往
+
+
+
+        拥有{{ Constants.initial_chips }}个筹码，进行一个为期{{Constants.num_rounds}}轮的实验。
+        每轮你需要决定{{ Constants.chips_per_round }}个筹码的去向，是将0，2，4个筹码投入气候账户，还是投入到自己的私人账户中。
+        如果你将0个筹码投入到气候账户，那么4个筹码自动投入到自己私人账户。类似的如果将2个筹码投入到气候账户，那么剩下的2个筹码自动投入到私人账户。 
+        
     </p>
 
     <p>
         每个参与者的收入分为两部分：
     </p>
-    <ol>
-        <li>剩余自有资金，即来自禀赋的80点减去存入公共池中的存款。</li>
-        <li>每人在公共池中的份额，即1.6×两人总存款的一半。</li>
-    </ol>
 </div> 
 
     {% next_button %}

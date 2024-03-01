@@ -9,8 +9,6 @@
     window.onload = function() {
 	    var A_income_0 = document.getElementById("A_income_0");
 	    var B_income_0 = document.getElementById("B_income_0");
-	    var A_income_80 = document.getElementById("A_income_80");
-	    var B_income_80 = document.getElementById("B_income_80");
 
       	// 获取提交按钮
 	    var btn_submit = document.getElementById("btn_submit");
@@ -18,11 +16,10 @@
 
             var A_income_0_value = A_income_0.value;
             var B_income_0_value = B_income_0.value;
-            var A_income_80_value = A_income_80.value;
-            var B_income_80_value = B_income_80.value;
+
             
         // 必填项验证
-            if (""==A_income_0_value) {
+        if (A_income_0_value == null || A_income_0_value=="") {
 		        alert("该输入项不能为空");
  	        return false;
             }
@@ -32,35 +29,18 @@
  	        return false;
             }
 
-            if (A_income_80_value == null || A_income_80_value=="") {
-		        alert("该输入项不能为空");
- 	        return false;
-            }
 
-            if (B_income_80_value == null || B_income_80_value =="") {
-        		alert("该输入项不能为空");
- 	        return false;
-            }
-
-        	if (A_income_0_value != 80 ) {
+        	if (A_income_0_value != 2 ) {
         		alert("第一个答案错误，请输入正确答案");
  	        return false;
             }
 
-        	if (B_income_0_value != 80 ) {
+        	if (B_income_0_value != 0.5 ) {
         		alert("第二个答案错误，请输入正确答案");
  	        return false;
             }
 
-        	if (A_income_80_value != 128) {
-        		alert("第三个答案错误，请输入正确答案");
- 	        return false;
-            }
 
-        	if (B_income_80_value != 128 ) {
-            	alert("第四个答案错误，请输入正确答案");
- 	        return false;
-            }
         // 错误信息清空
             msg.innerHTML = "";
             return true;
@@ -76,11 +56,11 @@
 
 
 
-    <p>以下是一些练习，可帮助您了解决策情况。</p>
+    <p>以下是实验的问题测试，可帮助您熟悉实验中的决策，只有通过一下测试才能进入正式实验。</p>
     <form  name="test"  onsubmit="return validateForm()" method="post">
     <ol>
-        <li>两个人都往公共池中存入0点，那么A的收入是:<input type="text" class="form-control-sm" id="A_income_0" placeholder="请输入正确答案"><span id="msg"></span>，B的收入是:<input type="text" class="form-control-sm" id="B_income_0"placeholder="请输入正确答案"><span id="msg"></span>。</li>
-        <li>两个人都往公共池中存了80点，那么A的收入是<input type="text" class="form-control-sm" id="A_income_80"placeholder="请输入正确答案"><span id="msg"></span>，B的收入是<input type="text" class="form-control-sm" id="B_income_80"placeholder="请输入正确答案"><span id="msg"></span>。</li>
+        <li>假如你往气候账户投入2个筹码，那么本轮你往自己的私人账户投入的筹码是：<input type="text" class="form-control-sm" id="A_income_0" placeholder="请输入0，2或者4"><span id="msg"></span>。</li>
+        <li>最后一轮结束后，整个小组往气候账户投入的筹码为130个，你们有多大的概率拿到私人账户的筹码<input type="text" class="form-control-sm" id="B_income_0"placeholder="请输入0，0.5或者1"><span id="msg"></span>。</li>
     </ol>
     <input type="submit" class="btn btn-primary" value="验证答案" id="btn_submit">
     </form>

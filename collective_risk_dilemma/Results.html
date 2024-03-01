@@ -1,13 +1,58 @@
-{{ block title }}结果{{ endblock }}
-{{ block content }}
-<div class="container"> 
-    <ul>
-        <li>你的初始禀赋为{{ Constants.endowment }}。</li>
-        <li>你往公共池中存入{{ player.contribution }}。</li>
-        <li>你所在的组总共往公共池中存入了{{ group.total_contribution }}。</li>
-        <li>因此每个人可以分得{{ group.individual_share }}。</li>
-        <li>因此你的收益为{{ player.payoff }}。</li>
-    </ul>
-</div>      
 
+{{ block content }}
+ 
+
+
+
+<div class="container">
+    <h1>本轮结果</h1>
+    <p>本轮中，你往气候账户中投入了 <strong>{{ player.investment }}</strong> 个筹码。</p>
+    <p>你得私人账户中拥有 <strong>{{ private_account }}</strong> 个筹码。</p>
+    <p>此时，你共往其后账户中投入 <strong>{{ climate_account_contribution }}</strong> 个筹码。</p>
+    <p>本轮所有玩家对气候账户的总贡献为 <strong>{{ total_contribution }}</strong> 个筹码。</p>
+    <p>到目前为止所有参与者对气候账户的总贡献为<strong>{{ group.total_climate_account }}</strong> 个筹码。</p>
+    <hr />
+    <h3>参与者气候账户本轮的投入</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>参与者</th>
+                <th>气候账户投入</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ for label, contribution in contributions }}
+            <tr>
+                <td>{{ label }}</td>
+                <td>{{ contribution }}</td>
+            </tr>
+            {{ endfor }}
+        </tbody>
+    </table>
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>参与者</th>
+                {% for round_number in rounds %}
+                <th>第{{ round_number }}轮</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for player_data in investments_data %}
+            <tr>
+                <td>{{ player_data.label }}</td>
+                {% for investment in player_data.investments %}
+                <td>{{ investment }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ next_button }}
+
+</div>
 {{ endblock }}
