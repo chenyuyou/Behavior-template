@@ -95,21 +95,27 @@ class Contribute(Page):
 
     @staticmethod
     def before_next_page(player,timeout_happened):
-        group = player.group
+
         if player.round_number > 1:
             previous_player = player.in_round(player.round_number - 1)
-            previous_group = group.in_round(player.round_number - 1)
+
             player.private_account = previous_player.private_account
             player.climate_account_contribution = previous_player.climate_account_contribution
-            group.total_climate_account = previous_group.total_climate_account           
+         
         player.private_account -= player.investment
         player.climate_account_contribution += player.investment
-        group.total_climate_account += player.investment
+
         player.add_investment(player.round_number, player.investment)
 
 
 class ResultsWaitPage(WaitPage):
-    after_all_players_arrive = set_payoffs
+    @staticmethod
+    def after_all_players_arrive(group: Group):
+        total_investment = sum([p.investment for p in group.get_players()])
+        if group.round_number > 1:
+            previous_group = group.in_round(group.round_number - 1)
+            group.total_climate_account = previous_group.total_climate_account 
+        group.total_climate_account += total_investment
 
 
 class Results(Page):
