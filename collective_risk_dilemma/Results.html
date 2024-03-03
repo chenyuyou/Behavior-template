@@ -1,58 +1,99 @@
-
-{{ block content }}
- 
-
-
+{% extends "global/Page.html" %}
+{% block content %}
 
 <div class="container">
-    <h1>本轮结果</h1>
+    <h1>第{{player.round_number}}轮结果</h1>
+    <hr />
+    <p>你是参与人<strong>{{ player.id_in_group }}</strong>。</p>
     <p>本轮中，你往气候账户中投入了 <strong>{{ player.investment }}</strong> 个筹码。</p>
     <p>你得私人账户中拥有 <strong>{{ private_account }}</strong> 个筹码。</p>
     <p>此时，你共往其后账户中投入 <strong>{{ climate_account_contribution }}</strong> 个筹码。</p>
     <p>本轮所有玩家对气候账户的总贡献为 <strong>{{ total_contribution }}</strong> 个筹码。</p>
     <p>到目前为止所有参与者对气候账户的总贡献为<strong>{{ group.total_climate_account }}</strong> 个筹码。</p>
-    <hr />
-    <h3>参与者气候账户本轮的投入</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>参与者</th>
-                <th>气候账户投入</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{ for label, contribution in contributions }}
-            <tr>
-                <td>{{ label }}</td>
-                <td>{{ contribution }}</td>
-            </tr>
-            {{ endfor }}
-        </tbody>
-    </table>
-    <hr />
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>参与者</th>
-                {% for round_number in rounds %}
-                <th>第{{ round_number }}轮</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for player_data in investments_data %}
-            <tr>
-                <td>{{ player_data.label }}</td>
-                {% for investment in player_data.investments %}
-                <td>{{ investment }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    {{ next_button }}
 
 </div>
-{{ endblock }}
+
+<div id="investmentTableContainer"></div>
+
+<style>
+    /* 标题样式 */
+    h5 {
+        font-family: Arial, sans-serif;
+        color: #333; /* 标题颜色 */
+        margin-top: 20px; /* 与页面顶部的距离 */
+        margin-bottom: 20px; /* 与表格之间的距离 */
+    }
+    /* 基础表格样式 */
+    .three-line-table {
+        width: 100%;
+        border-collapse: collapse; /* 折叠边框使表格看起来更紧凑 */
+    }
+
+    .three-line-table thead th {
+        border-top: 2px solid #000; /* 顶部边框线 */
+        border-bottom: 2px solid #000; /* 标题下方的边框线 */
+    }
+
+    .three-line-table tbody tr:last-child td {
+        border-bottom: 2px solid #000; /* 底部边框线 */
+    }
+
+    .three-line-table th,
+    .three-line-table td {
+        text-align: left;
+        padding: 8px; /* 单元格内填充 */
+    }
+
+
+</style>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var investments = JSON.parse('{{ investments_json|safe }}');
+    generateTable(investments);
+});
+
+function generateTable(data) {
+    var container = document.getElementById('investmentTableContainer');
+
+    // 创建并添加标题
+    var title = document.createElement('h2');
+    title.textContent = '所有参与人的气候投资决策';
+    title.style.textAlign = 'left'; // 标题居中
+    container.appendChild(title);
+
+    var table = document.createElement('table');
+    table.style.width = '100%';
+    table.classList.add('three-line-table');
+    
+    var thead = document.createElement('thead');
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<th>参与人</th>';
+    for (var i = 1; i <= 10; i++) {
+        tr.innerHTML += '<th>轮 ' + i + '</th>';
+    }
+    thead.appendChild(tr);
+    table.appendChild(thead);
+    
+    var tbody = document.createElement('tbody');
+    data.forEach(function(rowData, index) {
+        var row = document.createElement('tr');
+        row.innerHTML = '<td>' + (index + 1) + '</td>';
+        rowData.forEach(function(cellData) {
+            row.innerHTML += '<td>' + cellData + '</td>';
+        });
+        tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    
+    document.getElementById('investmentTableContainer').appendChild(table);
+}
+</script>
+
+
+
+{{ next_button }}
+{% endblock %}
