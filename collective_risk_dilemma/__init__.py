@@ -30,7 +30,7 @@ class Constants(BaseConstants):
     chips_per_round = 4
     collective_target = initial_chips/2 * players_per_group
     success_probability_default = 0.9   ##  还可能是0.5和0.1
-
+    probability = success_probability_default * 100
 
 class Subsession(BaseSubsession):
 
@@ -121,7 +121,8 @@ class Results(Page):
             'total_contribution': total_contribution,
             'private_account': player.private_account,
             'climate_account_contribution': player.climate_account_contribution,
-            'investment_history': investment_history
+            'investment_history': investment_history,
+            'num_rounds': Constants.num_rounds
         }
 
 class ResultsFinal(Page):
@@ -146,6 +147,5 @@ class ResultsFinal(Page):
         }
 
 
-#page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results, ResultsFinal]
+page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results, ResultsFinal]
 
-page_sequence = [Contribute, ResultsWaitPage, Results, ResultsFinal]

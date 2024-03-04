@@ -11,20 +11,18 @@ p {
 
 <div class="container">
     <p>
-        此刻，你参与{{Constants.players_per_group}}人为一组有关气候风险的实验。
-        这个实验共进行{{Constants.num_rounds}}轮，每一轮每人都需要面临一个决策，往
-
-
-
-        拥有{{ Constants.initial_chips }}个筹码，进行一个为期{{Constants.num_rounds}}轮的实验。
-        每轮你需要决定{{ Constants.chips_per_round }}个筹码的去向，是将0，2，4个筹码投入气候账户，还是投入到自己的私人账户中。
+        此刻，你参与一个{{Constants.players_per_group}}人为一组有关气候风险的实验。
+        这个实验共进行{{Constants.num_rounds}}轮，每一轮每人都需要面临一个决策，往气候账户投资，一避免可能出现的气候灾难，比如高温、海平面上升等。
+        实验开始时，你拥有{{ Constants.initial_chips }}个筹码，之后每轮你需要决定{{ Constants.chips_per_round }}个筹码的去向，选择将0个，或者2个，或者4个筹码投入气候账户，还是投入到自己的私人账户中。
         如果你将0个筹码投入到气候账户，那么4个筹码自动投入到自己私人账户。类似的如果将2个筹码投入到气候账户，那么剩下的2个筹码自动投入到私人账户。 
         
     </p>
 
     <p>
-        每个参与者的收入分为两部分：
-    </p>
+        在{{Constants.num_rounds}}轮结束后，如果组内气候账户的总额没有达到或者超过{{ Constants.collective_target }}个筹码，那么有{{ Constants.probability}}%概率损失私人账户的筹码。
+        如果组内气候账户的总额达到{{ Constants.collective_target }}个筹码，那么你将获得与私人账户对应的现金收入。
+    
+   </p>
 </div> 
 
     {% next_button %}

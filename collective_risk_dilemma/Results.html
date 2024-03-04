@@ -63,10 +63,11 @@ td {
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var investments = JSON.parse('{{ investment_history|safe }}');
-    generateTable(investments);
+    var num_rounds = JSON.parse('{{ num_rounds|safe }}');
+    generateTable(investments,num_rounds);
 });
 
-function generateTable(data) {
+function generateTable(data,num_rounds) {
     var container = document.getElementById('investmentTableContainer');
 
     // 创建并添加标题
@@ -82,7 +83,7 @@ function generateTable(data) {
     var thead = document.createElement('thead');
     var tr = document.createElement('tr');
     tr.innerHTML = '<th>参与人</th>';
-    for (var i = 1; i <= 10; i++) {
+    for (var i = 1; i <= num_rounds; i++) {
         tr.innerHTML += '<th>第' + i + '轮</th>';
     }
     thead.appendChild(tr);
@@ -94,8 +95,8 @@ function generateTable(data) {
     data.forEach(function(rowData, index) {
     var row = document.createElement('tr');
     row.innerHTML = '<td>' + (index + 1) + '</td>';
-    // 确保每行都有10个单元格
-    for (var i = 0; i < 10; i++) {
+    // 确保每行都有num_rounds个单元格
+    for (var i = 0; i < num_rounds; i++) {
         // 如果rowData[i]存在，则使用它的值，否则使用空字符串作为占位符
         var cellValue = rowData[i] !== undefined ? rowData[i] : '';
         row.innerHTML += '<td>' + cellValue + '</td>';
