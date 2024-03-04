@@ -24,12 +24,12 @@ def set_payoffs(group):
 
 class Constants(BaseConstants):
     name_in_url = 'collective_risk_dilemma'
-    players_per_group = 2
+    players_per_group = 6
     num_rounds = 10
     initial_chips = 40
     chips_per_round = 4
     collective_target = initial_chips/2 * players_per_group
-    success_probability_default = 0.9
+    success_probability_default = 0.9   ##  还可能是0.5和0.1
 
 
 class Subsession(BaseSubsession):
