@@ -28,7 +28,7 @@ class Constants(BaseConstants):
     num_rounds = 10
     initial_chips = 40
     chips_per_round = 4
-    collective_target = 120
+    collective_target = initial_chips/2 * players_per_group
     success_probability_default = 0.9
 
 
@@ -65,7 +65,7 @@ class Player(BasePlayer):
     )
     private_account = models.IntegerField(initial=Constants.initial_chips)
     climate_account_contribution = models.IntegerField(initial=0)
-    
+    final_payoff = models.CurrencyField()
 # PAGES
 class Introduction(Page):
     @staticmethod
@@ -121,10 +121,31 @@ class Results(Page):
             'total_contribution': total_contribution,
             'private_account': player.private_account,
             'climate_account_contribution': player.climate_account_contribution,
-            'investments_json': investment_history
+            'investment_history': investment_history
+        }
+
+class ResultsFinal(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == Constants.num_rounds
+
+    @staticmethod
+    def vars_for_template(player):
+        group = player.group
+        success = group.total_climate_account >= Constants.collective_target
+        for p in group.get_players():
+            if success:
+                p.final_payoff = p.private_account
+            else:
+                p.final_payoff = 0  # 或者任何未成功时的收益逻辑
+            p.payoff = p.final_payoff
+        return {
+            'success': success,
+            'final_payoff': player.final_payoff,
+            'total_investment': group.total_climate_account
         }
 
 
-#page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results]
+#page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results, ResultsFinal]
 
-page_sequence = [Contribute, ResultsWaitPage, Results]
+page_sequence = [Contribute, ResultsWaitPage, Results, ResultsFinal]

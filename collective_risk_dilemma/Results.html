@@ -17,33 +17,43 @@
 
 <style>
     /* 标题样式 */
-    h5 {
+    h4 {
         font-family: Arial, sans-serif;
         color: #333; /* 标题颜色 */
         margin-top: 20px; /* 与页面顶部的距离 */
         margin-bottom: 20px; /* 与表格之间的距离 */
     }
     /* 基础表格样式 */
-    .three-line-table {
-        width: 100%;
-        border-collapse: collapse; /* 折叠边框使表格看起来更紧凑 */
+    table {
+    border-collapse: collapse; /* 折叠表格边框，确保线条对齐 */
+    width: 100%; /* 表格宽度填满容器 */
+    margin: 0; /* 移除外边距 */
+    table-layout: fixed; /* 固定表格布局 */
     }
 
-    .three-line-table thead th {
-        border-top: 2px solid #000; /* 顶部边框线 */
-        border-bottom: 2px solid #000; /* 标题下方的边框线 */
+    /* 应用于表头的样式 */
+    thead th {
+        border-top: 2px solid #000; /* 上方边框 */
+        border-bottom: 2px solid #000; /* 下方边框 */
+        padding: 0.5em; /* 内边距，可以根据需要调整 */
+        width: 10%; /* 假设有10列，每列宽度设置为10% */
     }
 
-    .three-line-table tbody tr:last-child td {
-        border-bottom: 2px solid #000; /* 底部边框线 */
-    }
+/* 应用于表体的样式 */
+tbody td {
+    padding: 0.5em; /* 单元格内边距，确保与表头的内边距一致 */
+    border-bottom: 2px solid transparent; /* 透明边框保持单元格宽度一致 */
+}
 
-    .three-line-table th,
-    .three-line-table td {
-        text-align: left;
-        padding: 8px; /* 单元格内填充 */
-    }
+/* 应用于最后一行单元格的样式 */
+tbody tr:last-child td {
+    border-bottom: 2px solid #000; /* 下方边框 */
+}
 
+/* 移除单元格间的空隙 */
+td {
+    border: none; /* 移除单元格默认边框 */
+}
 
 </style>
 
@@ -52,7 +62,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var investments = JSON.parse('{{ investments_json|safe }}');
+    var investments = JSON.parse('{{ investment_history|safe }}');
     generateTable(investments);
 });
 
@@ -60,7 +70,7 @@ function generateTable(data) {
     var container = document.getElementById('investmentTableContainer');
 
     // 创建并添加标题
-    var title = document.createElement('h2');
+    var title = document.createElement('h4');
     title.textContent = '所有参与人的气候投资决策';
     title.style.textAlign = 'left'; // 标题居中
     container.appendChild(title);
@@ -79,14 +89,19 @@ function generateTable(data) {
     table.appendChild(thead);
     
     var tbody = document.createElement('tbody');
+
+
     data.forEach(function(rowData, index) {
-        var row = document.createElement('tr');
-        row.innerHTML = '<td>' + (index + 1) + '</td>';
-        rowData.forEach(function(cellData) {
-            row.innerHTML += '<td>' + cellData + '</td>';
-        });
-        tbody.appendChild(row);
-    });
+    var row = document.createElement('tr');
+    row.innerHTML = '<td>' + (index + 1) + '</td>';
+    // 确保每行都有10个单元格
+    for (var i = 0; i < 10; i++) {
+        // 如果rowData[i]存在，则使用它的值，否则使用空字符串作为占位符
+        var cellValue = rowData[i] !== undefined ? rowData[i] : '';
+        row.innerHTML += '<td>' + cellValue + '</td>';
+    }
+    tbody.appendChild(row);
+});
     table.appendChild(tbody);
     
     document.getElementById('investmentTableContainer').appendChild(table);

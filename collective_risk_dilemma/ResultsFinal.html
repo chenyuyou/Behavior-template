@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% block content %}
+<div>
+    <h1>最终结果</h1>
+    {% if success %}
+        <p>恭喜！你们的小组达到了投资目标。</p>
+    {% else %}
+        <p>很遗憾，你们的小组没有达到投资目标。</p>
+    {% endif %}
+    <p>小组总投资: {{ total_investment }} 筹码</p>
+    <p>你的最终收益: {{ final_payoff }} 筹码</p>
+</div>
+{% endblock %}
