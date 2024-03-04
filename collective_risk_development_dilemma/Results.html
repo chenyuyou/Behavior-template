@@ -1,0 +1,115 @@
+{% extends "global/Page.html" %}
+{% block content %}
+
+<div class="container">
+    <h1>第{{player.round_number}}轮结果</h1>
+    <hr />
+    <p>你是参与人<strong>{{ player.id_in_group }}</strong>。</p>
+    <p>本轮中，你往气候账户中投入了 <strong>{{ player.investment }}</strong> 个筹码。</p>
+    <p>你得私人账户中拥有 <strong>{{ private_account }}</strong> 个筹码。</p>
+    <p>此时，你共往其后账户中投入 <strong>{{ climate_account_contribution }}</strong> 个筹码。</p>
+    <p>本轮所有玩家对气候账户的总贡献为 <strong>{{ total_contribution }}</strong> 个筹码。</p>
+    <p>到目前为止所有参与者对气候账户的总贡献为<strong>{{ group.total_climate_account }}</strong> 个筹码。</p>
+
+</div>
+
+<div id="investmentTableContainer"></div>
+
+<style>
+    /* 标题样式 */
+    h4 {
+        font-family: Arial, sans-serif;
+        color: #333; /* 标题颜色 */
+        margin-top: 20px; /* 与页面顶部的距离 */
+        margin-bottom: 20px; /* 与表格之间的距离 */
+    }
+    /* 基础表格样式 */
+    table {
+    border-collapse: collapse; /* 折叠表格边框，确保线条对齐 */
+    width: 100%; /* 表格宽度填满容器 */
+    margin: 0; /* 移除外边距 */
+    table-layout: fixed; /* 固定表格布局 */
+    }
+
+    /* 应用于表头的样式 */
+    thead th {
+        border-top: 2px solid #000; /* 上方边框 */
+        border-bottom: 2px solid #000; /* 下方边框 */
+        padding: 0.5em; /* 内边距，可以根据需要调整 */
+        width: 10%; /* 假设有10列，每列宽度设置为10% */
+    }
+
+/* 应用于表体的样式 */
+tbody td {
+    padding: 0.5em; /* 单元格内边距，确保与表头的内边距一致 */
+    border-bottom: 2px solid transparent; /* 透明边框保持单元格宽度一致 */
+}
+
+/* 应用于最后一行单元格的样式 */
+tbody tr:last-child td {
+    border-bottom: 2px solid #000; /* 下方边框 */
+}
+
+/* 移除单元格间的空隙 */
+td {
+    border: none; /* 移除单元格默认边框 */
+}
+
+</style>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var investments = JSON.parse('{{ investment_history|safe }}');
+    var num_rounds = JSON.parse('{{ num_rounds|safe }}');
+    generateTable(investments,num_rounds);
+});
+
+function generateTable(data,num_rounds) {
+    var container = document.getElementById('investmentTableContainer');
+
+    // 创建并添加标题
+    var title = document.createElement('h4');
+    title.textContent = '所有参与人的气候投资决策';
+    title.style.textAlign = 'left'; // 标题居中
+    container.appendChild(title);
+
+    var table = document.createElement('table');
+    table.style.width = '100%';
+    table.classList.add('three-line-table');
+    
+    var thead = document.createElement('thead');
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<th>参与人</th>';
+    for (var i = 1; i <= num_rounds; i++) {
+        tr.innerHTML += '<th>第' + i + '轮</th>';
+    }
+    thead.appendChild(tr);
+    table.appendChild(thead);
+    
+    var tbody = document.createElement('tbody');
+
+
+    data.forEach(function(rowData, index) {
+    var row = document.createElement('tr');
+    row.innerHTML = '<td>' + (index + 1) + '</td>';
+    // 确保每行都有num_rounds个单元格
+    for (var i = 0; i < num_rounds; i++) {
+        // 如果rowData[i]存在，则使用它的值，否则使用空字符串作为占位符
+        var cellValue = rowData[i] !== undefined ? rowData[i] : '';
+        row.innerHTML += '<td>' + cellValue + '</td>';
+    }
+    tbody.appendChild(row);
+});
+    table.appendChild(tbody);
+    
+    document.getElementById('investmentTableContainer').appendChild(table);
+}
+</script>
+
+
+
+{{ next_button }}
+{% endblock %}
