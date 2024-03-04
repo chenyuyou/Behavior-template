@@ -36,7 +36,7 @@ class Subsession(BaseSubsession):
 
     def creating_session(subsession):
         subsession.group_randomly(fixed_id_in_group=True)
-
+   
 
 
 class Group(BaseGroup):
@@ -47,6 +47,16 @@ class Group(BaseGroup):
         # and apply results based on the success probability treatment.
         pass
 
+    def get_all_players_investment_history(self):
+        investment_history = []
+        players = self.get_players()
+        for p in players:
+            player_investment = []
+            # 获取每个玩家在所有轮次的投资数据
+            for player in p.in_all_rounds():
+                player_investment.append(player.investment)
+            investment_history.append(player_investment)
+        return investment_history
 
 
 class Player(BasePlayer):
@@ -55,27 +65,7 @@ class Player(BasePlayer):
     )
     private_account = models.IntegerField(initial=Constants.initial_chips)
     climate_account_contribution = models.IntegerField(initial=0)
-    investment_history = models.LongStringField(initial='')
-
-#    def add_investment(player,investment):
-#        if player.investments_history:
-#            investments = json.loads(player.investments_history)
-#        else:
-#            investments = {}
-#        investments[str(player.round_number)] = investment
-#        player.investments_history = json.dumps(investments)
-    def add_investment(self, round_number, investment):
-        # 更新投资历史
-        if not self.investment_history:
-            self.investment_history = json.dumps({})
-
-        investment_history = json.loads(self.investment_history)
-        investment_history[str(round_number)] = investment
-        self.investment_history = json.dumps(investment_history)
-
-
-
-
+    
 # PAGES
 class Introduction(Page):
     @staticmethod
@@ -95,18 +85,15 @@ class Contribute(Page):
 
     @staticmethod
     def before_next_page(player,timeout_happened):
-
         if player.round_number > 1:
             previous_player = player.in_round(player.round_number - 1)
-
             player.private_account = previous_player.private_account
             player.climate_account_contribution = previous_player.climate_account_contribution
-         
         player.private_account -= player.investment
         player.climate_account_contribution += player.investment
 
-        player.add_investment(player.round_number, player.investment)
-
+#        player.add_investment(player.round_number, player.investment)
+        
 
 class ResultsWaitPage(WaitPage):
     @staticmethod
@@ -123,36 +110,18 @@ class Results(Page):
     def vars_for_template(player):
         # 获取当前小组的所有玩家
         group = group = player.group
-        players = group.get_players()
-        
+        players = group.get_players()      
         contributions = [(p.id_in_group, p.investment) for p in players]
-        total_contribution = sum([p.investment for p in players])
-       
+        total_contribution = sum([p.investment for p in players])    
         rounds = list(range(1, Constants.num_rounds + 1))
-#        investments_data = []
-#        for p in group.get_players():
-#            investments = json.loads(p.investments_history)
-#            investments_data.append({
-#            'label': p.id_in_group,
-#            'investments': investments
-#            })
-        # 调用Group类中的方法获取投资历史
-        investments1 = [
-            # 示例数据
-            [2, 0, 4, 2, 4, 0, 2, 4, 2, 0],
-            [4, 2, 0, 4, 2, 4, 0, 2, 4, 2],
-            # 其他数据...
-        ]
-        # 将Python对象转换为JSON字符串
-        investments_json = json.dumps(investments1)
-
+        investment_history = group.get_all_players_investment_history()
         return {
             'rounds': rounds,
             'contributions': contributions,
             'total_contribution': total_contribution,
             'private_account': player.private_account,
             'climate_account_contribution': player.climate_account_contribution,
-            'investments_json': investments_json
+            'investments_json': investment_history
         }
 
 
