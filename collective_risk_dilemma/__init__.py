@@ -26,8 +26,8 @@ class Constants(BaseConstants):
     name_in_url = 'collective_risk_dilemma'
     players_per_group = 6
     num_rounds = 10
-    initial_chips = 40
     chips_per_round = 4
+    initial_chips: int = chips_per_round * num_rounds
     collective_target = int(chips_per_round/2 * players_per_group * num_rounds)
     success_probability_default = 0.9   ##  还可能是0.5和0.1
     probability = int(success_probability_default * 100)

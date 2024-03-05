@@ -24,10 +24,10 @@ def set_payoffs(group):
 
 class Constants(BaseConstants):
     name_in_url = 'collective_risk_dilemma'
-    players_per_group = 2
-    num_rounds = 1
-    initial_chips = 40
+    players_per_group = 6
+    num_rounds = 10
     chips_per_round = 4
+    initial_chips: int = chips_per_round * num_rounds
     collective_target = int(chips_per_round/2 * players_per_group * num_rounds)
     success_probability_default = 0.5   ##  还可能是0.5和0.1
     probability = int(success_probability_default * 100)
@@ -49,8 +49,7 @@ def creating_session(subsession:Subsession):
             p.participant.vars['group'] = 'B'
         # In subsequent rounds, maintain the group assignments
     else:
-        for p in subsession.get_players():
-            p.group = p.in_round(1).group
+        subsession.group_like_round(1)
 
 class Group(BaseGroup):
     total_climate_account = models.IntegerField(initial=0)
@@ -111,11 +110,12 @@ class Contribute(Page):
             return True  # Computer makes decision
         elif player.round_number > 3 and player.participant.vars['group'] == 'B':
             return True  # Player makes decision
+        else:
+            return False
         
 class Contribute_by_Computer(Page):
     @staticmethod
     def before_next_page(player,timeout_happened):
-        player.investment = Constants.chips_per_round
         if player.round_number > 1:
             previous_player = player.in_round(player.round_number - 1)
             player.private_account = previous_player.private_account
@@ -126,13 +126,19 @@ class Contribute_by_Computer(Page):
     @staticmethod
     def is_displayed(player):
         if player.round_number <= 3 and player.participant.vars['group'] == 'B':
+            player.investment = Constants.chips_per_round
             return True  # Player makes decision
+        else:
+            return False
 
 
 class ResultsWaitPage(WaitPage):
     @staticmethod
     def after_all_players_arrive(group: Group):
+
+
         total_investment = sum([p.investment for p in group.get_players()])
+
         if group.round_number > 1:
             previous_group = group.in_round(group.round_number - 1)
             group.total_climate_account = previous_group.total_climate_account 
@@ -184,6 +190,6 @@ class ResultsFinal(Page):
         }
 
 
-#page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results, ResultsFinal]
+page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results, ResultsFinal]
 
-page_sequence = [Contribute,Contribute_by_Computer, ResultsWaitPage, Results, ResultsFinal]
+
