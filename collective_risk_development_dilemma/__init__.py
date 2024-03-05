@@ -24,8 +24,8 @@ def set_payoffs(group):
 
 class Constants(BaseConstants):
     name_in_url = 'collective_risk_development_dilemma'
-    players_per_group = 2
-    num_rounds = 7
+    players_per_group = 6
+    num_rounds = 12
     chips_per_round = 4
     multiple_for_development = 1.5
     initial_chips: int = chips_per_round * num_rounds
