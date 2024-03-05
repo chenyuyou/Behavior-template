@@ -23,7 +23,7 @@ def set_payoffs(group):
 
 
 class Constants(BaseConstants):
-    name_in_url = 'collective_risk_dilemma'
+    name_in_url = 'collective_risk_unfair_dilemma'
     players_per_group = 6
     num_rounds = 10
     chips_per_round = 4
@@ -190,6 +190,6 @@ class ResultsFinal(Page):
         }
 
 
-page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results, ResultsFinal]
+page_sequence = [Introduction, Test, Contribute, Contribute_by_Computer, ResultsWaitPage, Results, ResultsFinal]
 
 

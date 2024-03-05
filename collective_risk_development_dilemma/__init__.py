@@ -23,10 +23,11 @@ def set_payoffs(group):
 
 
 class Constants(BaseConstants):
-    name_in_url = 'collective_risk_dilemma'
-    players_per_group = 6
-    num_rounds = 10
+    name_in_url = 'collective_risk_development_dilemma'
+    players_per_group = 2
+    num_rounds = 7
     chips_per_round = 4
+    multiple_for_development = 1.5
     initial_chips: int = chips_per_round * num_rounds
     collective_target = int(chips_per_round/2 * players_per_group * num_rounds)
     success_probability_default = 0.5   ##  还可能是0.5和0.1
@@ -35,21 +36,7 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     pass
 
-def creating_session(subsession:Subsession):
-    if subsession.round_number == 1:
-        players = subsession.get_players()
-        random.shuffle(players)  # Shuffle to ensure randomness
-            # Split players into two groups, A and B
-        group_a = players[:int(Constants.players_per_group/2)]
-        group_b = players[int(Constants.players_per_group/2):]
-            # Assign groups
-        for p in group_a:
-            p.participant.vars['group'] = 'A'
-        for p in group_b:
-            p.participant.vars['group'] = 'B'
-        # In subsequent rounds, maintain the group assignments
-    else:
-        subsession.group_like_round(1)
+
 
 class Group(BaseGroup):
     total_climate_account = models.IntegerField(initial=0)
@@ -75,7 +62,7 @@ class Player(BasePlayer):
     investment = models.IntegerField(
         choices=[0,2,4], widget=widgets.RadioSelect,label="往气候账户投入的筹码数：(0，2，4中任意整数)"
     )
-    private_account = models.IntegerField(initial=Constants.initial_chips)
+    private_account = models.FloatField(initial=Constants.initial_chips)
     climate_account_contribution = models.IntegerField(initial=0)
     final_payoff = models.CurrencyField()
 # PAGES
@@ -106,14 +93,13 @@ class Contribute(Page):
 
     @staticmethod
     def is_displayed(player):
-        if player.participant.vars['group'] == 'A':
+        if player.round_number < 3 or player.round_number > 6:
             return True  # Computer makes decision
-        elif player.round_number > 3 and player.participant.vars['group'] == 'B':
-            return True  # Player makes decision
-        else:
-            return False
         
-class Contribute_by_Computer(Page):
+class Contribute_for_development(Page):
+    form_model = 'player'
+    form_fields = ['investment']
+
     @staticmethod
     def before_next_page(player,timeout_happened):
         if player.round_number > 1:
@@ -121,24 +107,19 @@ class Contribute_by_Computer(Page):
             player.private_account = previous_player.private_account
             player.climate_account_contribution = previous_player.climate_account_contribution
         player.private_account -= player.investment
+        player.private_account += (Constants.chips_per_round - player.investment) * Constants.multiple_for_development
         player.climate_account_contribution += player.investment
 
     @staticmethod
     def is_displayed(player):
-        if player.round_number <= 3 and player.participant.vars['group'] == 'B':
-            player.investment = Constants.chips_per_round
+        if player.round_number >= 3 and player.round_number <= 6:            
             return True  # Player makes decision
-        else:
-            return False
 
 
 class ResultsWaitPage(WaitPage):
     @staticmethod
     def after_all_players_arrive(group: Group):
-
-
         total_investment = sum([p.investment for p in group.get_players()])
-
         if group.round_number > 1:
             previous_group = group.in_round(group.round_number - 1)
             group.total_climate_account = previous_group.total_climate_account 
@@ -190,6 +171,6 @@ class ResultsFinal(Page):
         }
 
 
-page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results, ResultsFinal]
+#page_sequence = [Introduction, Test, Contribute, ResultsWaitPage, Results, ResultsFinal]
 
-
+page_sequence = [Contribute, Contribute_for_development, ResultsWaitPage, Results, ResultsFinal]
