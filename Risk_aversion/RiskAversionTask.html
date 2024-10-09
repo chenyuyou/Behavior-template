@@ -1,0 +1,32 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}风险偏好测量{{ endblock }}
+{{ block content }}
+
+<p>对于每个决策，请在选项A和选项B之间进行选择：</p>
+
+<table class="table">
+    <tr>
+        <th>决策</th>
+        <th>选项 A</th>
+        <th>选项 B</th>
+        <th>您的选择</th>
+    </tr>
+    {% for choice, field_name in choices %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+            {{ choice.A.p|floatformat:1 }}的概率获得{{ choice.A.high }}，<br>
+            {{ 1 - choice.A.p|floatformat:1 }}的概率获得{{ choice.A.low }}
+        </td>
+        <td>
+            {{ choice.B.p|floatformat:1 }}的概率获得{{ choice.B.high }}，<br>
+            {{ 1 - choice.B.p|floatformat:1 }}的概率获得{{ choice.B.low }}
+        </td>
+        <td>{% formfield field_name %}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{{ next_button }}
+
+{{ endblock }}
