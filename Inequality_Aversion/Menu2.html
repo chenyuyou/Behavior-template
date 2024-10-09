@@ -1,0 +1,28 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}劣势不公平{{ endblock }}
+{{ block content }}
+
+<p>对于每个决策，请在选项A和选项B之间进行选择：</p>
+
+<table class="table">
+    <tr>
+        <th>决策</th>
+        <th>选项 A</th>
+        <th>选项 B</th>
+        <th>你的选择</th>
+    </tr>
+    {% for choice, field_name in choices %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>你: {{ choice.A.你 }}, 他人: {{ choice.A.他人 }}</td>
+        <td>你: {{ choice.B.你 }}, 他人: {{ choice.B.他人 }}</td>
+        <td>
+            {% formfield field_name %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{{ next_button }}
+
+{{ endblock }}
