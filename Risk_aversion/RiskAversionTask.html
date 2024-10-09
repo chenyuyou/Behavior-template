@@ -15,12 +15,12 @@
     <tr>
         <td>{{ forloop.counter }}</td>
         <td>
-            {{ choice.A.p|floatformat:1 }}的概率获得{{ choice.A.high }}，<br>
-            {{ 1 - choice.A.p|floatformat:1 }}的概率获得{{ choice.A.low }}
+            {{ choice.A.p_high }}%的概率获得{{ choice.A.high }}，<br>
+            {{ choice.A.p_low }}%的概率获得{{ choice.A.low }}
         </td>
         <td>
-            {{ choice.B.p|floatformat:1 }}的概率获得{{ choice.B.high }}，<br>
-            {{ 1 - choice.B.p|floatformat:1 }}的概率获得{{ choice.B.low }}
+            {{ choice.B.p_high }}%的概率获得{{ choice.B.high }}，<br>
+            {{ choice.B.p_low }}%的概率获得{{ choice.B.low }}
         </td>
         <td>{% formfield field_name %}</td>
     </tr>

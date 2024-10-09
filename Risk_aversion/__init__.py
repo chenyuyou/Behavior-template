@@ -6,16 +6,16 @@ class Constants(BaseConstants):
     num_rounds = 1
     
     choices = [
-        {'A': {'p': 0.1, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.1, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 0.2, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.2, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 0.3, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.3, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 0.4, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.4, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 0.5, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.5, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 0.6, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.6, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 0.7, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.7, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 0.8, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.8, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 0.9, 'high': 2.00, 'low': 1.60}, 'B': {'p': 0.9, 'high': 3.85, 'low': 0.10}},
-        {'A': {'p': 1.0, 'high': 2.00, 'low': 1.60}, 'B': {'p': 1.0, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 10, 'p_low': 90, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 10, 'p_low': 90, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 20, 'p_low': 80, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 20, 'p_low': 80, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 30, 'p_low': 70, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 30, 'p_low': 70, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 40, 'p_low': 60, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 40, 'p_low': 60, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 50, 'p_low': 50, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 50, 'p_low': 50, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 60, 'p_low': 40, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 60, 'p_low': 40, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 70, 'p_low': 30, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 70, 'p_low': 30, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 80, 'p_low': 20, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 80, 'p_low': 20, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 90, 'p_low': 10, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 90, 'p_low': 10, 'high': 3.85, 'low': 0.10}},
+        {'A': {'p_high': 100, 'p_low': 0, 'high': 2.00, 'low': 1.60}, 'B': {'p_high': 100, 'p_low': 0, 'high': 3.85, 'low': 0.10}},
     ]
 
 class Subsession(BaseSubsession):
