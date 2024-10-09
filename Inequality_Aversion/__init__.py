@@ -75,7 +75,8 @@ class Player(BasePlayer):
     beta = models.FloatField()
     alpha_interval = models.StringField()
     beta_interval = models.StringField()
-
+    alpha_consistency = models.StringField()
+    beta_consistency = models.StringField()
     
 # PAGES
 class Introduction(Page):
@@ -116,13 +117,37 @@ class CalculationWaitPage(WaitPage):
 
 def calculate_parameters(player: Player):
     def calculate_parameter(choices, thresholds):
-        for i, choice in enumerate(choices):
-            if choice == 'B':
+        switch_points = []
+        last_choice = choices[0]
+        for i, choice in enumerate(choices[1:], 1):
+            if choice != last_choice:
+                switch_points.append(i)
+                last_choice = choice
+        
+        if not switch_points:
+            if choices[0] == 'A':
+                return thresholds[-1], f">{thresholds[-1]}", "consistent"
+            else:
+                return thresholds[0], f"<{thresholds[0]}", "consistent"
+        elif len(switch_points) == 1:
+            i = switch_points[0]
+            if i == 0:
+                return thresholds[0], None, "consistent"
+            elif i == len(choices) - 1:
+                return (thresholds[-2] + thresholds[-1]) / 2, f"[{thresholds[-1]}, {thresholds[-2]}]", "consistent"
+            else:
+                return (thresholds[i-1] + thresholds[i]) / 2, f"[{thresholds[i]}, {thresholds[i-1]}]", "consistent"
+        else:
+            estimates = []
+            for i in switch_points:
                 if i == 0:
-                    return thresholds[0], None
+                    estimates.append(thresholds[0])
                 else:
-                    return (thresholds[i-1] + thresholds[i]) / 2, f"[{thresholds[i]}, {thresholds[i-1]}]"
-        return thresholds[-1], None
+                    estimates.append((thresholds[i-1] + thresholds[i]) / 2)
+            
+            estimate = sum(estimates) / len(estimates)
+            interval = f"[{min(thresholds[min(switch_points)-1:max(switch_points)+1])}, {max(thresholds[min(switch_points)-1:max(switch_points)+1])}]"
+            return estimate, interval, "inconsistent"
 
     alpha_thresholds = [0.19, 0.12, 0.04, -0.05, -0.16, -0.29, -0.47, -0.69, -1.00, -1.44]
     beta_thresholds = [0.60, 0.14, -0.11, -0.27, -0.38, -0.47, -0.53, -0.58, -0.62, -0.65]
@@ -130,8 +155,8 @@ def calculate_parameters(player: Player):
     alpha_choices = [getattr(player, f'menu1_choice_{i}') for i in range(1, 11)]
     beta_choices = [getattr(player, f'menu2_choice_{i}') for i in range(1, 11)]
 
-    player.alpha, player.alpha_interval = calculate_parameter(alpha_choices, alpha_thresholds)
-    player.beta, player.beta_interval = calculate_parameter(beta_choices, beta_thresholds)
+    player.alpha, player.alpha_interval, player.alpha_consistency = calculate_parameter(alpha_choices, alpha_thresholds)
+    player.beta, player.beta_interval, player.beta_consistency = calculate_parameter(beta_choices, beta_thresholds)
 
 class Results(Page):
     pass  # 不再需要在这里进行计算
